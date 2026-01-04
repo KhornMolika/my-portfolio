@@ -1,0 +1,99 @@
+import { motion } from "framer-motion";
+import ProfileCard from "../ProfileCard";
+
+export default function HeroAvatar() {
+  return (
+    <motion.div
+      className="relative w-full max-w-md lg:max-w-lg flex justify-center lg:justify-end mx-auto px-4 sm:px-6 lg:px-0"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+    >
+      <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-none flex items-center justify-center lg:justify-end">
+        {/* Glowing ring */}
+        <motion.div
+          className="absolute inset-0 bg-linear-to-r from-[#6F8F7A] via-[#C6A15B] to-[#6F8F7A] rounded-full blur-2xl opacity-30"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.4, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Main circle */}
+        <motion.div
+          className="relative z-10"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          <ProfileCard
+            name="KHORN Molika"
+            title="Software Engineer"
+            handle="khornmolika"
+            status="Online"
+            contactText="Contact Me"
+            avatarUrl="/images/pixel.png"
+            showUserInfo={true}
+            enableTilt={true}
+            enableMobileTilt={false}
+            onContactClick={() => console.log("clicked")}
+          />
+        </motion.div>
+
+        {/* Floating elements */}
+        {/* Top right floating square */}
+        <motion.div
+          className="absolute -z-10 
+            -top-2 right-2
+            sm:-top-4 sm:right-6
+            md:-top-4 md:right-8
+            lg:-top-4 lg:right-0.5
+            w-12 h-12
+            sm:w-16 sm:h-16
+            md:w-20 md:h-20
+            lg:w-24 lg:h-24
+            bg-linear-to-br from-[#C6A15B] to-[#6F8F7A] rounded-lg rotate-12 opacity-80"
+          animate={{
+            y: [0, -20, 0],
+            rotate: [12, 18, 12],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Bottom left floating circle */}
+        <motion.div
+          className="absolute -z-10
+            -bottom-4 left-2
+            sm:-bottom-6 sm:left-4
+            md:-bottom-6 md:left-12
+            lg:-bottom-6 lg:left-20
+            w-16 h-16
+            sm:w-20 sm:h-20
+            md:w-24 md:h-24
+            lg:w-32 lg:h-32
+            bg-linear-to-br from-[#6F8F7A] to-[#C6A15B]
+            rounded-full opacity-60"
+          animate={{
+            y: [0, 20, 0],
+            x: [0, -10, 0],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+      </div>
+    </motion.div>
+  );
+}
