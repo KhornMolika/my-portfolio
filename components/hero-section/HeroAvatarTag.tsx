@@ -5,27 +5,16 @@ import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 
 export interface HeroAvatarTagProps {
-  /** Path to avatar image */
   avatarSrc: string;
-  /** Alt text for avatar image */
   avatarAlt?: string;
-  /** Badge text content */
   text: string;
-  /** Animation variants for parent container (optional) */
   variants?: Variants;
-  /** Avatar size in pixels (default: 20) */
   avatarSize?: number;
-  /** Whether to show avatar (default: true) */
   showAvatar?: boolean;
-  /** Horizontal padding (default: "px-3") */
   paddingX?: string;
-  /** Vertical padding (default: "py-1.5") */
   paddingY?: string;
-  /** Border radius for container (default: "rounded-full") */
   borderRadius?: string;
-  /** Whether avatar should have circular border (default: true) */
   avatarCircleBorder?: boolean;
-  /** Whether avatar should be grayscale (default: false) */
   grayscale?: boolean;
 }
 
@@ -51,9 +40,9 @@ const HeroAvatarTag: React.FC<HeroAvatarTagProps> = ({
     >
       <motion.div
         className={`group relative ${paddingX} ${paddingY}
-           bg-linear-to-r from-[#6F8F7A]/5 to-[#C6A15B]/5
-           backdrop-blur-sm border border-[#6F8F7A]/20
-           ${borderRadius} overflow-hidden`}
+          bg-linear-to-r from-[#6F8F7A]/5 to-[#C6A15B]/5
+          backdrop-blur-sm border border-[#6F8F7A]/20
+          ${borderRadius} overflow-hidden`}
         initial={{ opacity: 0, y: -20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{
@@ -67,6 +56,7 @@ const HeroAvatarTag: React.FC<HeroAvatarTagProps> = ({
           scale: 1.02,
         }}
       >
+        {/* Hover gradient */}
         <motion.div
           className="absolute inset-0 bg-linear-to-r from-[#6F8F7A]/10 to-[#C6A15B]/10"
           initial={{ opacity: 0 }}
@@ -74,10 +64,11 @@ const HeroAvatarTag: React.FC<HeroAvatarTagProps> = ({
           transition={{ duration: 0.4 }}
         />
 
-        <motion.p
+        {/* ✅ FIX: div instead of p */}
+        <motion.div
           className="relative text-[#C6A15B] text-xs font-light
-              tracking-[0.15em] flex items-center gap-1.5
-              justify-center lg:justify-start whitespace-nowrap"
+            tracking-[0.15em] flex items-center gap-1.5
+            justify-center lg:justify-start whitespace-nowrap"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -91,10 +82,7 @@ const HeroAvatarTag: React.FC<HeroAvatarTagProps> = ({
               }`}
               style={{ width: avatarSize, height: avatarSize }}
               initial={{ scale: 0, rotate: -180 }}
-              animate={{
-                scale: 1,
-                rotate: 0,
-              }}
+              animate={{ scale: 1, rotate: 0 }}
               transition={{
                 type: "spring",
                 stiffness: 200,
@@ -102,7 +90,7 @@ const HeroAvatarTag: React.FC<HeroAvatarTagProps> = ({
                 delay: 0.2,
               }}
             >
-              {/* Avatar image container with breathing animation */}
+              {/* Avatar image */}
               <motion.div
                 className="w-full h-full"
                 animate={{ scale: [1, 1.05, 1] }}
@@ -121,7 +109,7 @@ const HeroAvatarTag: React.FC<HeroAvatarTagProps> = ({
                 />
               </motion.div>
 
-              {/* Pulse effect */}
+              {/* Pulse */}
               <motion.div
                 className={`absolute inset-0 bg-[#C6A15B]/20 pointer-events-none ${
                   avatarCircleBorder ? "rounded-full" : ""
@@ -148,7 +136,7 @@ const HeroAvatarTag: React.FC<HeroAvatarTagProps> = ({
           >
             {text}
           </motion.span>
-        </motion.p>
+        </motion.div>
       </motion.div>
     </motion.div>
   );

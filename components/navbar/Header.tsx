@@ -62,7 +62,7 @@ const Header: React.FC<HeaderProps> = ({ items }) => {
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* LEFT: Brand */}
           <motion.div
-            className="text-lg sm:text-xl md:text-2xl font-semibold text-white tracking-wide z-50"
+            className="text-lg sm:text-xl md:text-2xl font-semibold text-white tracking-widest z-50"
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
