@@ -24,12 +24,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const navItems = [
-    { label: "About", href: "#about" },
-    { label: "Projects", href: "#projects" },
-    { label: "Contact", href: "#contact" },
-  ];
-
   return (
     <html lang="en">
       <body
@@ -44,7 +38,7 @@ export default function RootLayout({
             speed={0.5}
           />
         </div>
-        <Header items={navItems} />
+        <Header />
 
         <main className="pt-16">{children}</main>
       </body>

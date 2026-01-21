@@ -10,7 +10,7 @@ export default function HeroSection() {
   const isInView = useInView(ref, { amount: 0.3 });
 
   return (
-    <section ref={ref} className="min-h-screen relative overflow-hidden flex items-center justify-center py-12 sm:py-16 md:py-20">
+    <section ref={ref} className="min-h-screen relative overflow-hidden flex items-center justify-center ">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-20">
         <div className={`absolute top-20 left-10 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-[#6F8F7A] rounded-full mix-blend-multiply filter blur-xl ${isInView ? 'animate-blob' : ''}`}></div>
