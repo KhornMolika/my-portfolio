@@ -9,7 +9,6 @@ export default function HeroAvatar() {
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
         staggerChildren: 0.2,
       },
     },
@@ -43,8 +42,6 @@ export default function HeroAvatar() {
             opacity: [0.3, 0.4, 0.3],
           }}
           transition={{
-            duration: 3,
-            repeat: Infinity,
             ease: "easeInOut",
           }}
         />

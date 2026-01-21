@@ -113,6 +113,8 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --project-darkgreen: oklch(0.25 0.05 150);
+  --project-gold: oklch(73% 0.13 80);
 }
 
 @layer base {
