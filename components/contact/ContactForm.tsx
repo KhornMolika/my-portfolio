@@ -41,7 +41,7 @@ export default function ContactForm() {
     
     try {
       const response = await fetch(
-        "https://formsubmit.co/alexkgm2412@gmail.com",
+        "https://formsubmit.co/molikakhorn71@gmail.com",
         {
           method: "POST",
           headers: {
@@ -177,8 +177,7 @@ export default function ContactForm() {
               {/* Button content */}
               <div className="btn-content">
                 {isLoading ? (
-                  <div className="flex items-center justify-center gap-3">
-                    <div className="loader"></div>
+                  <div className="gap-3">
                     <span className="loading-text">SENDING</span>
                     <span className="loading-dots">
                       <span>.</span>
@@ -188,8 +187,8 @@ export default function ContactForm() {
                   </div>
                 ) : (
                   <div className="btn-text-wrapper">
-                    <span className="btn-text">SHARE YOUR FEEDBACK</span>
-                    <span className="btn-icon">→</span>
+                    <span className="btn-text text-white">SHARE YOUR FEEDBACK</span>
+                    <span className="btn-icon text-white">→</span>
                   </div>
                 )}
               </div>
@@ -219,7 +218,7 @@ export default function ContactForm() {
           </div>
 
           <p className="text-gray-400 text-center max-w-md leading-relaxed animate-fade-in text-lg">
-            It is very important for us to keep in touch with you, so we are always ready to answer any question that interests you. Shoot!
+            Looking to hire a passionate and skilled developer? Have a project in mind or a question about my work? Feel free to reach out! I'm always eager to discuss new opportunities and collaborations.
           </p>
         </div>
       </div>
@@ -490,8 +489,8 @@ export default function ContactForm() {
         .btn-content {
           position: relative;
           z-index: 2;
-          background: white;
           height: 100%;
+          width: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -557,16 +556,6 @@ export default function ContactForm() {
           }
         }
 
-        /* Loading animations */
-        .loader {
-          width: 20px;
-          height: 20px;
-          border: 3px solid rgba(0, 0, 0, 0.1);
-          border-top-color: #000;
-          border-radius: 50%;
-          animation: spin 0.8s linear infinite;
-        }
-        
         @keyframes spin {
           to {
             transform: rotate(360deg);
