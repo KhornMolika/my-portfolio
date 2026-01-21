@@ -173,21 +173,34 @@ const ToolsTechnologies: React.FC = () => {
     <div className="py-16 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-3">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ amount: 0.3 }}
+          className="mb-12"
+        >
+          <motion.h1
+            variants={itemVariants}
+            className="text-4xl md:text-5xl font-bold text-white mb-3"
+          >
             Tools & Technologies
-          </h1>
-          <p className="text-lg" style={{ color: "#C6A15B" }}>
+          </motion.h1>
+          <motion.p
+            variants={itemVariants}
+            className="text-lg"
+            style={{ color: "#C6A15B" }}
+          >
             My Professional Skills
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ amount: 0.3 }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           {tools.map((tool, index) => (

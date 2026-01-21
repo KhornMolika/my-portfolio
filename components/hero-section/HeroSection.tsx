@@ -1,16 +1,21 @@
 "use client";
 
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import HeroContent from "./HeroContent";
 import HeroAvatar from "./HeroAvatar";
 
 export default function HeroSection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { amount: 0.3 });
+
   return (
-    <section className="min-h-screen relative overflow-hidden flex items-center justify-center py-12 sm:py-16 md:py-20">
+    <section ref={ref} className="min-h-screen relative overflow-hidden flex items-center justify-center py-12 sm:py-16 md:py-20">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-20 left-10 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-[#6F8F7A] rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-        <div className="absolute top-40 right-10 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-[#C6A15B] rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-20 left-1/2 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-[#6F8F7A] rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+        <div className={`absolute top-20 left-10 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-[#6F8F7A] rounded-full mix-blend-multiply filter blur-xl ${isInView ? 'animate-blob' : ''}`}></div>
+        <div className={`absolute top-40 right-10 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-[#C6A15B] rounded-full mix-blend-multiply filter blur-xl ${isInView ? 'animate-blob animation-delay-2000' : ''}`}></div>
+        <div className={`absolute bottom-20 left-1/2 w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-[#6F8F7A] rounded-full mix-blend-multiply filter blur-xl ${isInView ? 'animate-blob animation-delay-4000' : ''}`}></div>
       </div>
 
       {/* Grid pattern overlay */}
