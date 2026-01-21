@@ -222,7 +222,7 @@ function Band({
               opacity={backImage ? 1 : cardOpacity}
               color={backImage ? "white" : cardColor}
               map={backTexture}
-              side={THREE.FrontSide}
+              side={THREE.BackSide}
             />
           </mesh>
         </RigidBody>

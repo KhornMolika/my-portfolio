@@ -1,7 +1,10 @@
+import AboutTag from "./AboutTag";
+
 export default function AboutContent() {
   return (
     <div>
-      <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+      <AboutTag />
+      <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 mt-4">
         About Me
       </h2>
 
