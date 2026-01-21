@@ -27,14 +27,11 @@ interface ElasticBandProps {
   cardOpacity?: number;
   frontImage?: string;
   backImage?: string;
-  title?: string;
-  titlePosition?: [number, number, number];
-  titleColor?: string;
-  titleSize?: number;
+  transparent?: boolean;
 }
 
 export default function ElasticBand({
-  backgroundColor = "#000000",
+  backgroundColor = "transparent",
   wireColor = "white",
   wireWidth = 1,
   wireOpacity = 0.25,
@@ -42,10 +39,6 @@ export default function ElasticBand({
   cardOpacity = 0.25,
   frontImage,
   backImage,
-  title,
-  titlePosition = [0, 5.5, 0],
-  titleColor = "white",
-  titleSize = 0.5,
 }: ElasticBandProps) {
   return (
     <div style={{ width: "100%", height: "100%", minHeight: "400px", backgroundColor }}>
@@ -61,15 +54,6 @@ export default function ElasticBand({
               frontImage={frontImage}
               backImage={backImage}
             />
-            {title && (
-              <Text 
-                position={titlePosition} 
-                color={titleColor}
-                fontSize={titleSize}
-              >
-                {title}
-              </Text>
-            )}
           </Physics>
         </Suspense>
       </Canvas>
@@ -255,28 +239,6 @@ function Band({
         />
       </mesh>
     </>
-  );
-}
-
-// Simple Text component using 3D text
-function Text({ 
-  children, 
-  position, 
-  color = "white",
-  fontSize = 0.5 
-}: { 
-  children: string; 
-  position: [number, number, number];
-  color?: string;
-  fontSize?: number;
-}) {
-  const textRef = useRef<THREE.Mesh>(null);
-  
-  return (
-    <mesh ref={textRef} position={position}>
-      <boxGeometry args={[children.length * fontSize * 0.6, fontSize, 0.1]} />
-      <meshBasicMaterial color={color} transparent opacity={0.8} />
-    </mesh>
   );
 }
 
