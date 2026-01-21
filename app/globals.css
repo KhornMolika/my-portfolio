@@ -123,3 +123,40 @@
     @apply bg-background text-foreground;
   }
 }
+
+.shining-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.shining-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at var(--x) var(--y),
+    rgba(198, 161, 91, 0.2),
+    transparent 20%
+  );
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.shining-card:hover::before {
+  opacity: 1;
+}
+
+@keyframes shine {
+  0% {
+    --x: -50%;
+    --y: -50%;
+  }
+  100% {
+    --x: 150%;
+    --y: 150%;
+  }
+}

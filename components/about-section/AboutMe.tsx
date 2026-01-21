@@ -1,12 +1,47 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import AboutContent from "./AboutContent";
 import Lanyard from "../ElasticBand";
+import { motion, useScroll, useTransform } from "framer-motion";
+
+const itemVariants = {
+  hidden: { opacity: 0, x: 50 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
 
 const AboutMe: React.FC = () => {
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["-25%", "25%"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty("--x", `${x}px`);
+    e.currentTarget.style.setProperty("--y", `${y}px`);
+  };
+
   return (
-    <section className="w-full max-w-6xl mx-auto p-6">
-      <div
-        className="relative rounded-3xl border-2 p-8 md:p-12 overflow-hidden"
+    <section className="w-full max-w-6xl mx-auto p-6" ref={targetRef}>
+      <motion.div
+        onMouseMove={handleMouseMove}
+        variants={itemVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="shining-card relative rounded-3xl border-2 p-8 md:p-12 overflow-hidden"
         style={{ backgroundColor: "#0F2E26", borderColor: "#6F8F7A80" }}
       >
         {/* Background glow effect */}
@@ -27,10 +62,10 @@ const AboutMe: React.FC = () => {
             cardColor="#6F8F7A"
             backCardColor="#6F8F7A"
             frontImage="/images/ampor_latest.png"
-            backImage="/images/pixel.png"
+            backImage="/images/card_avatar_bg.png"
           />
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

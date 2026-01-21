@@ -197,6 +197,7 @@ function Band({
           ref={card}
           angularDamping={2}
           linearDamping={2}
+          restitution={0}
           type={dragged ? "kinematicPosition" : "dynamic"}
         >
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
