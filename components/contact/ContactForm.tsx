@@ -9,19 +9,78 @@ export default function ContactForm() {
     message: ''
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    type: 'success',
+    message: ''
+  });
 
   const handleSubmit = async () => {
+    // Validate form
+    if (!formData.name || !formData.email || !formData.message) {
+      setModalState({
+        isOpen: true,
+        type: 'error',
+        message: 'Please fill in all fields'
+      });
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setModalState({
+        isOpen: true,
+        type: 'error',
+        message: 'Please enter a valid email address'
+      });
+      return;
+    }
+
     setIsLoading(true);
-    console.log('Form submitted:', formData);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    alert('Thank you for your feedback!');
-    setIsLoading(false);
-    
-    // Reset form
-    setFormData({ name: '', email: '', message: '' });
+    try {
+      const response = await fetch(
+        "https://formsubmit.co/alexkgm2412@gmail.com",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            message: formData.message,
+            _subject: `New Contact Form Submission from ${formData.name}`,
+            _captcha: "false",
+            _template: "table",
+          }),
+        }
+      );
+      
+      if (response.ok) {
+        setModalState({
+          isOpen: true,
+          type: "success",
+          message:
+            "Your message has been sent successfully! I'll get back to you soon.",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error("Failed to send message");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setModalState({
+        isOpen: true,
+        type: "error",
+        message:
+          "Failed to send your message. Please try again or email me directly at alexkgm2412@gmail.com",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e:any) => {
@@ -29,6 +88,10 @@ export default function ContactForm() {
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const closeModal = () => {
+    setModalState({ ...modalState, isOpen: false });
   };
 
   return (
@@ -42,6 +105,24 @@ export default function ContactForm() {
         <div className="particle particle-5"></div>
       </div>
 
+      {/* Modal */}
+      {modalState.isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[rgba(0,0,0,0.5)] backdrop-blur-sm" onClick={closeModal}>
+          <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+            <div className={`modal-icon ${modalState.type === 'success' ? 'modal-success' : 'modal-error'}`}>
+              {modalState.type === 'success' ? '✓' : '✕'}
+            </div>
+            <h3 className="modal-title">
+              {modalState.type === 'success' ? 'Success!' : 'Oops!'}
+            </h3>
+            <p className="modal-message">{modalState.message}</p>
+            <button onClick={closeModal} className="modal-button">
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="w-full max-w-6xl grid md:grid-cols-2 gap-16 items-center relative z-10">
         {/* Left Side - Form */}
         <div className="space-y-8 animate-slide-in-left">
@@ -53,6 +134,7 @@ export default function ContactForm() {
                 placeholder="Your Name"
                 value={formData.name}
                 onChange={handleChange}
+                autoComplete="off"
                 className="w-full bg-transparent border-b-2 border-gray-600 text-white placeholder-gray-500 py-4 focus:outline-none focus:border-transparent transition-all duration-500 input-field"
               />
               <div className="input-line"></div>
@@ -65,6 +147,7 @@ export default function ContactForm() {
                 placeholder="Your Email"
                 value={formData.email}
                 onChange={handleChange}
+                autoComplete="off"
                 className="w-full bg-transparent border-b-2 border-gray-600 text-white placeholder-gray-500 py-4 focus:outline-none focus:border-transparent transition-all duration-500 input-field"
               />
               <div className="input-line"></div>
@@ -110,9 +193,6 @@ export default function ContactForm() {
                   </div>
                 )}
               </div>
-              
-              {/* Hover shine effect */}
-              {/* <div className="btn-shine"></div> */}
             </button>
           </div>
         </div>
@@ -127,7 +207,7 @@ export default function ContactForm() {
               <div className="flex items-center justify-center gap-6 mb-2">
                 <div className="accent-line"></div>
                 <h2 className="text-6xl md:text-8xl font-bold animate-float-delayed">
-                  <span className="glitch-text-blue" data-text="Us">Us</span>
+                  <span className="glitch-text-blue" data-text="Me">Me</span>
                 </h2>
               </div>
             </div>
@@ -145,6 +225,120 @@ export default function ContactForm() {
       </div>
 
       <style jsx>{`
+        /* Modal styles */
+        .modal-container {
+          background: rgba(0, 0, 0, 0.85);
+          backdrop-filter: blur(20px);
+          border-radius: 16px;
+          padding: 40px;
+          max-width: 450px;
+          width: 100%;
+          text-align: center;
+          border: 1px solid rgba(255, 215, 0, 0.2);
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.15);
+          animation: modal-slide-in 0.4s ease-out;
+        }
+
+        @keyframes modal-slide-in {
+          from {
+            opacity: 0;
+            transform: translateY(-30px) scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        .modal-icon {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          margin: 0 auto 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 40px;
+          font-weight: bold;
+          animation: icon-pop 0.5s ease-out 0.2s both;
+        }
+
+        @keyframes icon-pop {
+          0% {
+            transform: scale(0);
+            opacity: 0;
+          }
+          50% {
+            transform: scale(1.2);
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        .modal-success {
+          background: linear-gradient(135deg, #32CD32 0%, #228B22 100%);
+          color: white;
+          box-shadow: 0 0 30px rgba(50, 205, 50, 0.5);
+        }
+
+        .modal-error {
+          background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+          color: white;
+          box-shadow: 0 0 30px rgba(255, 68, 68, 0.5);
+        }
+
+        .modal-title {
+          color: white;
+          font-size: 28px;
+          font-weight: bold;
+          margin-bottom: 16px;
+          animation: fade-in-up 0.5s ease-out 0.3s both;
+        }
+
+        .modal-message {
+          color: #d1d1d1;
+          font-size: 16px;
+          line-height: 1.6;
+          margin-bottom: 32px;
+          animation: fade-in-up 0.5s ease-out 0.4s both;
+        }
+
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .modal-button {
+          background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+          color: #000;
+          font-weight: 600;
+          padding: 14px 40px;
+          border-radius: 8px;
+          border: none;
+          cursor: pointer;
+          font-size: 16px;
+          transition: all 0.3s ease;
+          animation: fade-in-up 0.5s ease-out 0.5s both;
+          box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .modal-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 25px rgba(255, 215, 0, 0.5);
+        }
+
+        .modal-button:active {
+          transform: translateY(0);
+        }
+
         /* Particle animations */
         .particle {
           position: absolute;
@@ -310,7 +504,6 @@ export default function ContactForm() {
           transition: all 0.3s ease;
         }
         
-        
         .btn-text-wrapper {
           display: flex;
           align-items: center;
@@ -333,27 +526,6 @@ export default function ContactForm() {
         
         .btn-submit:hover .btn-icon {
           transform: translateX(5px);
-        }
-        
-        .btn-shine {
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 50%;
-          height: 100%;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.8),
-            transparent
-          );
-          transition: left 0.6s ease;
-          z-index: 3;
-          pointer-events: none;
-        }
-        
-        .btn-submit:hover .btn-shine {
-          left: 200%;
         }
         
         .btn-submit:hover {
@@ -533,7 +705,7 @@ export default function ContactForm() {
         .accent-line {
           height: 3px;
           width: 120px;
-          background: linear-gradient(90deg, transparent, #00D9FF, transparent);
+          background: linear-gradient(90deg, transparent, #0e7835, transparent);
           animation: line-pulse 2s ease-in-out infinite;
         }
         
