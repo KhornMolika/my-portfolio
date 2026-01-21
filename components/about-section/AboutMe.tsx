@@ -48,17 +48,15 @@ const AboutMe: React.FC = () => {
           <AboutContent />
 
           {/* Right content - Text */}
-          <motion.div style={{ y }}>
-            <Lanyard
-              transparent={true}
-              wireColor="#C6A15B"
-              wireWidth={1.5}
-              cardColor="#6F8F7A"
-              backCardColor="#6F8F7A"
-              frontImage="/images/ampor_latest.png"
-              backImage="/images/card_avatar_bg.png"
-            />
-          </motion.div>
+          <Lanyard
+            transparent={true}
+            wireColor="#C6A15B"
+            wireWidth={1.5}
+            cardColor="#6F8F7A"
+            backCardColor="#6F8F7A"
+            frontImage="/images/ampor_latest.png"
+            backImage="/images/card_avatar_bg.png"
+          />
         </div>
       </div>
     </motion.section>

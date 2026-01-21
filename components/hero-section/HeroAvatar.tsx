@@ -2,12 +2,37 @@ import { motion } from "framer-motion";
 import ProfileCard from "../ProfileCard";
 
 export default function HeroAvatar() {
+  const containerVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
   return (
     <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ amount: 0.3 }}
       className="relative w-full max-w-md lg:max-w-lg flex justify-center lg:justify-end mx-auto px-4 sm:px-6 lg:px-0"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
     >
       <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-none flex items-center justify-center lg:justify-end">
         {/* Glowing ring */}
@@ -26,10 +51,8 @@ export default function HeroAvatar() {
 
         {/* Main circle */}
         <motion.div
+          variants={itemVariants}
           className="relative z-10"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
         >
           <ProfileCard
             name="KHORN Molika"

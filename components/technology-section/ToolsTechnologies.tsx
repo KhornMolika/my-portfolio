@@ -3,21 +3,29 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  Zap,
-  Atom,
-  Triangle,
-  Palette,
-  Type,
-  Code,
-  Circle,
-  Github,
-  PenTool,
-  Smartphone,
-  Keyboard,
-  Flame,
-  FileText,
-  Brush,
-} from "lucide-react";
+  DiVisualstudio,
+  DiReact,
+  DiNodejsSmall,
+  DiGithubBadge,
+  DiBootstrap,
+  DiJavascript1,
+  DiCss3,
+  DiHtml5,
+  DiFirebase,
+  DiJava,
+  DiDjango,
+  DiGit, // New import for Git
+  DiDotnet // For C#
+} from "react-icons/di";
+import {
+  SiTailwindcss,
+  SiTypescript,
+  SiFigma,
+  SiCanva,
+  SiKotlin,
+  SiFlutter, // New import for Flutter
+  SiDart, // New import for Dart
+} from "react-icons/si";
 
 // ToolCard Component
 interface ToolCardProps {
@@ -72,87 +80,116 @@ const ToolCard: React.FC<ToolCardProps> = ({
 const ToolsTechnologies: React.FC = () => {
   const tools = [
     {
-      icon: <Zap size={24} />,
+      icon: <DiVisualstudio size={32} />,
       name: "Visual Studio Code",
       category: "Code Editor",
       bgColor: "bg-blue-600/20 text-blue-400",
     },
     {
-      icon: <Atom size={24} />,
+      icon: <DiReact size={32} />,
       name: "React JS",
       category: "Framework",
       bgColor: "bg-cyan-500/20 text-cyan-300",
     },
-    { icon: <Triangle size={24} />, name: "Next JS", category: "Framework", bgColor: "bg-white/20 text-white" },
     {
-      icon: <Palette size={24} />,
+      icon: <DiDjango size={32} />,
+      name: "Django",
+      category: "Framework",
+      bgColor: "bg-green-700/20 text-green-500",
+    },
+    {
+      icon: <SiTailwindcss size={28} />,
       name: "Tailwind CSS",
       category: "Framework",
       bgColor: "bg-cyan-400/20 text-cyan-200",
     },
     {
-      icon: <Type size={24} />,
+      icon: <DiBootstrap size={32} />,
       name: "Bootstrap",
       category: "Framework",
       bgColor: "bg-purple-600/20 text-purple-400",
     },
     {
-      icon: <Code size={24} />,
+      icon: <DiJavascript1 size={32} />,
       name: "JavaScript",
       category: "Language",
       bgColor: "bg-yellow-400/20 text-yellow-200",
     },
     {
-      icon: <Circle size={24} />,
+      icon: <DiNodejsSmall size={32} />,
       name: "Node JS",
       category: "JavaScript Runtime",
       bgColor: "bg-green-600/20 text-green-400",
     },
     {
-      icon: <Github size={24} />,
+      icon: <DiGithubBadge size={32} />,
       name: "GitHub",
       category: "Repository",
       bgColor: "bg-gray-700/20 text-gray-400",
     },
     {
-      icon: <PenTool size={24} />,
-      name: "Adobe Illustrator",
-      category: "Design App",
-      bgColor: "bg-orange-600/20 text-orange-400",
+      icon: <DiGit size={32} />,
+      name: "Git",
+      category: "Version Control",
+      bgColor: "bg-orange-700/20 text-orange-500",
     },
     {
-      icon: <Palette size={24} />,
+      icon: <DiJava size={32} />,
+      name: "Java",
+      category: "Language",
+      bgColor: "bg-red-600/20 text-red-400",
+    },
+    {
+      icon: <SiFlutter size={28} />,
+      name: "Flutter",
+      category: "Framework",
+      bgColor: "bg-blue-500/20 text-blue-300",
+    },
+    {
+      icon: <SiDart size={28} />,
+      name: "Dart",
+      category: "Language",
+      bgColor: "bg-blue-400/20 text-blue-200",
+    },
+    {
+      icon: <DiDotnet size={32} />,
+      name: "C#",
+      category: "Language",
+      bgColor: "bg-purple-800/20 text-purple-600",
+    },
+    {
+      icon: <SiCanva size={28} />,
       name: "Canva",
       category: "Design App",
       bgColor: "bg-cyan-400/20 text-cyan-200",
     },
     {
-      icon: <Smartphone size={24} />,
+      icon: <SiFigma size={28} />,
       name: "Figma",
       category: "Design App",
       bgColor: "bg-purple-500/20 text-purple-300",
     },
     {
-      icon: <Keyboard size={24} />,
+      icon: <SiKotlin size={28} />,
       name: "Kotlin",
       category: "Language",
       bgColor: "bg-purple-600/20 text-purple-400",
     },
     {
-      icon: <Flame size={24} />,
+      icon: <DiFirebase size={32} />,
       name: "Firebase",
       category: "Framework",
       bgColor: "bg-yellow-500/20 text-yellow-300",
     },
     {
-      icon: <FileText size={24} />,
+      icon: <DiHtml5 size={32} />,
       name: "HTML",
       category: "Language",
       bgColor: "bg-orange-600/20 text-orange-400",
     },
-    { icon: <Brush size={24} />, name: "CSS", category: "Language", bgColor: "bg-blue-500/20 text-blue-300" },
+    { icon: <DiCss3 size={32} />, name: "CSS", category: "Language", bgColor: "bg-blue-500/20 text-blue-300" },
     {
-      icon: <Code size={24} />,
+      icon: <SiTypescript size={28} />,
       name: "TypeScript",
       category: "Language",
       bgColor: "bg-blue-600/20 text-blue-400",
@@ -201,7 +238,7 @@ const ToolsTechnologies: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ amount: 0.3 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center"
         >
           {tools.map((tool, index) => (
             <ToolCard

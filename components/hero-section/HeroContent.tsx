@@ -14,20 +14,18 @@ export default function HeroContent() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
+        staggerChildren: 0.1,
       },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
+        duration: 0.5,
       },
     },
   };
@@ -52,28 +50,28 @@ export default function HeroContent() {
         style={{ fontFamily: "'Inter', sans-serif" }}
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ amount: 0.3 }}
       >
 
 
-        <HeroAvatarTag
-          avatarSrc="/images/pixel.png"
-          text={'"BUILDING THE FUTURE"'}
-          paddingX="px-8"
-          paddingY="py-4"
-          avatarSize={28}
-          borderRadius="rounded-xl"
-          avatarCircleBorder={false}
-        />
+        <motion.div variants={itemVariants}>
+          <HeroAvatarTag
+            avatarSrc="/images/pixel.png"
+            text={'"BUILDING THE FUTURE"'}
+            paddingX="px-8"
+            paddingY="py-4"
+            avatarSize={28}
+            borderRadius="rounded-xl"
+            avatarCircleBorder={false}
+          />
+        </motion.div>
 
         {/* Name with staggered animation */}
         <motion.div className="space-y-2" variants={itemVariants}>
           <motion.h1
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl
                font-light text-white leading-[1.15] tracking-tight"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
           >
             Hi, I'm
           </motion.h1>
@@ -82,9 +80,6 @@ export default function HeroContent() {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl
                font-normal leading-[1.15]"
             style={{ fontFamily: "'Ephesis', cursive" }}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
           >
             <motion.span
               className="bg-linear-to-r from-[#6F8F7A] via-[#C6A15B] to-[#6F8F7A]
@@ -105,9 +100,7 @@ export default function HeroContent() {
 
           <motion.div
             className="h-0.5 bg-linear-to-r from-[#6F8F7A] to-[#C6A15B] rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: "4rem" }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            style={{ transformOrigin: "left" }}
           />
         </motion.div>
 
@@ -140,17 +133,11 @@ export default function HeroContent() {
         <motion.div className="flex items-center gap-4" variants={itemVariants}>
           <motion.span
             className="text-sm text-slate-400 font-light tracking-wider"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
           >
             CONNECT
           </motion.span>
           <motion.div
             className="h-px w-8 bg-linear-to-r from-slate-600 to-transparent"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
             style={{ transformOrigin: "left" }}
           />
           <div className="flex gap-3">
