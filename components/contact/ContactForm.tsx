@@ -278,15 +278,15 @@ export default function ContactForm() {
         }
 
         .modal-success {
-          background: linear-gradient(135deg, #32CD32 0%, #228B22 100%);
+          background: linear-gradient(135deg, #6F8F7A 0%, #0F2E26 100%);
           color: white;
-          box-shadow: 0 0 30px rgba(50, 205, 50, 0.5);
+          box-shadow: 0 0 30px rgba(111, 143, 122, 0.5);
         }
 
         .modal-error {
-          background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+          background: linear-gradient(135deg, #C6A15B 0%, #0F2E26 100%);
           color: white;
-          box-shadow: 0 0 30px rgba(255, 68, 68, 0.5);
+          box-shadow: 0 0 30px rgba(198, 161, 91, 0.5);
         }
 
         .modal-title {
@@ -317,7 +317,7 @@ export default function ContactForm() {
         }
 
         .modal-button {
-          background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+          background: linear-gradient(135deg, #C6A15B 0%, #6F8F7A 100%);
           color: #000;
           font-weight: 600;
           padding: 14px 40px;
@@ -327,12 +327,12 @@ export default function ContactForm() {
           font-size: 16px;
           transition: all 0.3s ease;
           animation: fade-in-up 0.5s ease-out 0.5s both;
-          box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+          box-shadow: 0 4px 15px rgba(198, 161, 91, 0.3);
         }
 
         .modal-button:hover {
           transform: translateY(-2px);
-          box-shadow: 0 6px 25px rgba(255, 215, 0, 0.5);
+          box-shadow: 0 6px 25px rgba(198, 161, 91, 0.5);
         }
 
         .modal-button:active {
@@ -417,7 +417,7 @@ export default function ContactForm() {
           left: 0;
           height: 2px;
           width: 0;
-          background: linear-gradient(90deg, #FFD700, #00D9FF);
+          background: linear-gradient(90deg, #6F8F7A, #C6A15B);
           transition: width 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
         
@@ -447,11 +447,10 @@ export default function ContactForm() {
           padding: 3px;
           background: linear-gradient(
             45deg,
-            #FFD700,
-            #FFA500,
-            #32CD32,
-            #006400,
-            #FFD700
+            #6F8F7A,
+            #C6A15B,
+            #0F2E26,
+            #6F8F7A
           );
           background-size: 400% 400%;
           animation: gradient-rotate 4s ease infinite;
@@ -466,10 +465,9 @@ export default function ContactForm() {
           border-radius: 4px;
           background: linear-gradient(
             45deg,
-            rgba(255, 215, 0, 0.3),
-            rgba(255, 165, 0, 0.3),
-            rgba(50, 205, 50, 0.3),
-            rgba(0, 100, 0, 0.3)
+            rgba(198, 161, 91, 0.3),
+            rgba(111, 143, 122, 0.3),
+            rgba(15, 46, 38, 0.3)
           );
           background-size: 400% 400%;
           animation: gradient-rotate 4s ease infinite, glow-pulse 2s ease-in-out infinite;
@@ -614,9 +612,9 @@ export default function ContactForm() {
           display: inline-block;
           color: white;
           text-shadow: 
-            0 0 20px rgba(255, 215, 0, 0.5),
-            3px 0 0 rgba(255, 100, 0, 0.7),
-            -3px 0 0 rgba(0, 150, 255, 0.7);
+            0 0 20px rgba(198, 161, 91, 0.5),
+            3px 0 0 rgba(111, 143, 122, 0.7),
+            -3px 0 0 rgba(15, 46, 38, 0.7);
           animation: glitch-skew 5s infinite;
         }
         
@@ -632,14 +630,14 @@ export default function ContactForm() {
         
         .glitch-text::before {
           left: 2px;
-          text-shadow: -2px 0 #ff00de;
+          text-shadow: -2px 0 #6F8F7A;
           clip: rect(24px, 550px, 90px, 0);
           animation: glitch-anim 3s infinite linear alternate-reverse;
         }
         
         .glitch-text::after {
           left: -2px;
-          text-shadow: -2px 0 #00fff9;
+          text-shadow: -2px 0 #C6A15B;
           clip: rect(85px, 550px, 140px, 0);
           animation: glitch-anim 2.5s infinite linear alternate-reverse;
         }
@@ -649,9 +647,9 @@ export default function ContactForm() {
           display: inline-block;
           color: white;
           text-shadow: 
-            0 0 20px rgba(0, 217, 255, 0.5),
-            3px 0 0 rgba(255, 100, 0, 0.7),
-            -3px 0 0 rgba(0, 150, 255, 0.7);
+            0 0 20px rgba(111, 143, 122, 0.5),
+            3px 0 0 rgba(198, 161, 91, 0.7),
+            -3px 0 0 rgba(15, 46, 38, 0.7);
         }
         
         @keyframes glitch-anim {
@@ -705,7 +703,7 @@ export default function ContactForm() {
         .accent-line {
           height: 3px;
           width: 120px;
-          background: linear-gradient(90deg, transparent, #0e7835, transparent);
+          background: linear-gradient(90deg, transparent, #6F8F7A, transparent);
           animation: line-pulse 2s ease-in-out infinite;
         }
         
