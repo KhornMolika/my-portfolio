@@ -25,6 +25,7 @@ const AboutMe: React.FC = () => {
             wireColor="#C6A15B"
             wireWidth={1.5}
             cardColor="#6F8F7A"
+            backCardColor="#6F8F7A"
             frontImage="/images/ampor_latest.png"
             backImage="/images/pixel.png"
           />

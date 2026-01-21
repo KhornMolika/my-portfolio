@@ -40,7 +40,7 @@ export default function AboutTag() {
                   tracking-[0.15em] flex items-center gap-1.5
                   justify-center lg:justify-start"
         >
-          ABOUT
+          KHORN MOLIKA
         </p>
       </motion.div>
     </motion.div>

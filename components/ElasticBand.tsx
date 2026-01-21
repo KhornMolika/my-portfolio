@@ -24,6 +24,7 @@ interface ElasticBandProps {
   wireWidth?: number;
   wireOpacity?: number;
   cardColor?: string;
+  backCardColor?: string;
   cardOpacity?: number;
   frontImage?: string;
   backImage?: string;
@@ -36,6 +37,7 @@ export default function ElasticBand({
   wireWidth = 1,
   wireOpacity = 0.25,
   cardColor = "white",
+  backCardColor,
   cardOpacity = 0.25,
   frontImage,
   backImage,
@@ -50,6 +52,7 @@ export default function ElasticBand({
               wireWidth={wireWidth}
               wireOpacity={wireOpacity}
               cardColor={cardColor}
+              backCardColor={backCardColor || cardColor}
               cardOpacity={cardOpacity}
               frontImage={frontImage}
               backImage={backImage}
@@ -66,6 +69,7 @@ function Band({
   wireWidth, 
   wireOpacity,
   cardColor,
+  backCardColor,
   cardOpacity,
   frontImage,
   backImage 
@@ -74,6 +78,7 @@ function Band({
   wireWidth: number;
   wireOpacity: number;
   cardColor: string;
+  backCardColor: string;
   cardOpacity: number;
   frontImage?: string;
   backImage?: string;
@@ -111,7 +116,7 @@ function Band({
   useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
   useSphericalJoint(j3, card, [
     [0, 0, 0],
-    [0, 1.45, 0],
+    [0, 1.125, 0],
   ]);
 
   useFrame((state) => {
@@ -220,7 +225,7 @@ function Band({
             <meshBasicMaterial
               transparent
               opacity={backImage ? 1 : cardOpacity}
-              color={backImage ? "white" : cardColor}
+              color={backImage ? "white" : backCardColor}
               map={backTexture}
               side={THREE.BackSide}
             />
