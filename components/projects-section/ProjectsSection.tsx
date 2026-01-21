@@ -4,7 +4,7 @@ import React from "react";
 import ChromaGrid, { ChromaItem } from "../ChromaGrid";
 import { motion } from "framer-motion"; // Import motion
 
-const itemVariants = {
+const itemVariants = { // Defined here
   hidden: { opacity: 0, y: 20 },
   visible: {
     y: 0,
@@ -102,18 +102,19 @@ const ProjectsSection = () => {
         <motion.p
           variants={itemVariants}
           className="text-lg"
-          style={{ color: "#C6A15B" }} // Using the new gold color for subtitle
+          style={{ color: "var(--project-gold)" }}
         >
           My Latest Creations
         </motion.p>
       </motion.div>
 
-      <motion.div
+      <motion.div // Added motion.div and perspective
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ amount: 0.1 }}
         className="flex flex-col items-center gap-8"
+        style={{ perspective: "1000px" }}
       >
         <ChromaGrid
           items={webProjects}
@@ -121,6 +122,7 @@ const ProjectsSection = () => {
           damping={0.45}
           fadeOut={0.6}
           ease="power3.out"
+          itemVariants={itemVariants} // Pass itemVariants
         />
         <ChromaGrid
           items={appProjects}
@@ -128,6 +130,7 @@ const ProjectsSection = () => {
           damping={0.45}
           fadeOut={0.6}
           ease="power3.out"
+          itemVariants={itemVariants} // Pass itemVariants
         />
       </motion.div>
     </div>
