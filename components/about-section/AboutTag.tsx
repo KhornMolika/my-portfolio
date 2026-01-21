@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
+import ShinyText from "../ShinyText"; // Import the ShinyText component
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -40,7 +41,7 @@ export default function AboutTag() {
                   tracking-[0.15em] flex items-center gap-1.5
                   justify-center lg:justify-start"
         >
-          KHORN MOLIKA
+          <ShinyText text="KHORN MOLIKA" speed={1.5} color="#C6A15B" shineColor="#ffffff" spread={90} />
         </p>
       </motion.div>
     </motion.div>
