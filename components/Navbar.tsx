@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import ActiveLink from "./navbar/ActiveLink";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -28,24 +29,15 @@ const Navbar: React.FC<NavbarProps> = ({ items }) => {
   const navTop = useTransform(scrollY, [0, 100], ["0px", "16px"]);
   const navPadding = useTransform(scrollY, [0, 100], ["24px", "16px"]);
 
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-    setIsMobileMenuOpen(false); // Close mobile menu on click
-  };
-
   const navLinks = items.map((item) => (
-    <Link
+    <ActiveLink
       key={item.label}
       href={item.href}
-      onClick={(e) => handleScroll(e, item.href)}
-      className="text-gray-300 hover:text-white transition-colors"
+      className="relative text-gray-300 transition-colors px-3 py-1.5"
+      activeClassName="text-white"
     >
       {item.label}
-    </Link>
+    </ActiveLink>
   ));
 
   return (
@@ -67,7 +59,7 @@ const Navbar: React.FC<NavbarProps> = ({ items }) => {
         <Link href="/" className="text-white font-bold text-xl">
           Khorn Molika
         </Link>
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-4 relative">
           {navLinks}
         </div>
         <div className="md:hidden">
