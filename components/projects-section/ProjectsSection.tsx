@@ -31,7 +31,7 @@ const webProjects: ChromaItem[] = [
     title: "Web Project 1 Title",
     subtitle: "Description for Web Project",
     handle: "@webdev1",
-    borderColor: "#C6A15B",
+    borderColor: "var(--project-gold)",
     url: "https://github.com/webproject1",
   },
   {
@@ -39,7 +39,7 @@ const webProjects: ChromaItem[] = [
     title: "Web Project 2 Title",
     subtitle: "Description for Web Project",
     handle: "@webdev2",
-    borderColor: "#C6A15B",
+    borderColor: "var(--project-gold)",
     url: "https://github.com/webproject2",
   },
   {
@@ -47,7 +47,7 @@ const webProjects: ChromaItem[] = [
     title: "Web Project 3 Title",
     subtitle: "Description for Web Project",
     handle: "@webdev3",
-    borderColor: "#C6A15B",
+    borderColor: "var(--project-gold)",
     url: "https://github.com/webproject3",
   },
 ];
@@ -58,7 +58,7 @@ const appProjects: ChromaItem[] = [
     title: "App Project 1 Title",
     subtitle: "Description for App Project",
     handle: "@appdev1",
-    borderColor: "#C6A15B",
+    borderColor: "var(--project-gold)",
     url: "https://github.com/appproject1",
   },
   {
@@ -66,7 +66,7 @@ const appProjects: ChromaItem[] = [
     title: "App Project 2 Title",
     subtitle: "Description for App Project",
     handle: "@appdev2",
-    borderColor: "#C6A15B",
+    borderColor: "var(--project-gold)",
     url: "https://github.com/appproject2",
   },
   {
@@ -74,7 +74,7 @@ const appProjects: ChromaItem[] = [
     title: "App Project 3 Title",
     subtitle: "Description for App Project",
     handle: "@appdev3",
-    borderColor: "#C6A15B",
+    borderColor: "var(--project-gold)",
     url: "https://github.com/appproject3",
   },
 ];
@@ -108,7 +108,13 @@ const ProjectsSection = () => {
         </motion.p>
       </motion.div>
 
-      <div className="flex flex-col items-center gap-8">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ amount: 0.1 }}
+        className="flex flex-col items-center gap-8"
+      >
         <ChromaGrid
           items={webProjects}
           radius={300}
@@ -123,7 +129,7 @@ const ProjectsSection = () => {
           fadeOut={0.6}
           ease="power3.out"
         />
-      </div>
+      </motion.div>
     </div>
   );
 };

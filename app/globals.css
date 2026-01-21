@@ -51,6 +51,7 @@
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
+  --project-gold: #C6A15B;
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
@@ -114,7 +115,7 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
   --project-darkgreen: oklch(0.25 0.05 150);
-  --project-gold: oklch(73% 0.13 80);
+  --project-gold: #C6A15B;
 }
 
 @layer base {

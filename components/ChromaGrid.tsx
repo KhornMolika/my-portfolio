@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
+import { motion } from 'framer-motion';
 
 export interface ChromaItem {
   image: string;
@@ -24,6 +25,17 @@ export interface ChromaGridProps {
 }
 
 type SetterFn = (v: number | string) => void;
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
 
 const ChromaGrid: React.FC<ChromaGridProps> = ({
   items,
@@ -163,11 +175,13 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
       }
     >
       {data.map((c, i) => (
-        <article
+        <motion.article
           key={i}
+          variants={itemVariants}
+          whileHover={{ scale: 1.02, y: -5, boxShadow: "0 10px 15px rgba(0, 0, 0, 0.3)" }} // Added whileHover
           onMouseMove={handleCardMove}
           onClick={() => handleCardClick(c.url)}
-          className="group relative flex flex-col w-[300px] rounded-[20px] overflow-hidden border-2 transition-all duration-300 cursor-pointer group-hover:shadow-lg"
+          className="group relative flex flex-col w-[300px] rounded-[20px] overflow-hidden border-2 transition-all duration-300 cursor-pointer" // Removed group-hover:shadow-lg
           style={
             {
               '--card-border': c.borderColor || 'transparent',
@@ -195,7 +209,7 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
             <p className="m-0 text-[0.85rem] opacity-85">{c.subtitle}</p>
             {c.location && <span className="text-[0.85rem] opacity-85 text-right">{c.location}</span>}
           </footer>
-        </article>
+        </motion.article>
       ))}
       <div
         className="absolute inset-0 pointer-events-none z-30"
