@@ -31,7 +31,7 @@ export default function AboutContent() {
         About Me
       </motion.h2>
 
-      <div className="min-h-[10rem] md:min-h-[12rem]"> {/* Adjusted min-height for two paragraphs */}
+      <div className="min-h-40 md:min-h-48"> {/* Adjusted min-height for two paragraphs */}
         <TextType
           text={fullDescription}
           typingSpeed={50}
