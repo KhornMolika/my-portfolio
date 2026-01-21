@@ -20,34 +20,49 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ item, itemVariants }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const mouseXSpring = useSpring(x, { stiffness: 600, damping: 15 });
-  const mouseYSpring = useSpring(y, { stiffness: 600, damping: 15 });
+  const mouseXSpring = useSpring(x, { stiffness: 800, damping: 20 });
+  const mouseYSpring = useSpring(y, { stiffness: 800, damping: 20 });
 
-  // Constants for tilt effect
-  const ROTATION_RANGE = 15; // Reduced for smoother effect
-  const BOX_SHADOW_COLOR = "rgba(0, 0, 0, 0.3)"; // Shadow color
+  // Constants for fancy modern tilt effect
+  const ROTATION_RANGE = 20; // Perfect balance for modern effect
+  const BOX_SHADOW_COLOR = "rgba(0, 0, 0, 0.4)"; // Deeper shadow
 
+  // Smooth easing function for natural motion
   const rotateX = useTransform(
     mouseYSpring,
     [-0.5, 0.5],
-    [-ROTATION_RANGE, ROTATION_RANGE] // Output numbers
+    [ROTATION_RANGE, -ROTATION_RANGE],
+    { ease: (t) => t * t * (3 - 2 * t) } // Smooth step interpolation
   );
   const rotateY = useTransform(
     mouseXSpring,
     [-0.5, 0.5],
-    [-ROTATION_RANGE, ROTATION_RANGE] // Output numbers
+    [-ROTATION_RANGE, ROTATION_RANGE],
+    { ease: (t) => t * t * (3 - 2 * t) }
   );
 
-  // New: Define translateZ motion values for inner content
+  // Enhanced 3D depth with dynamic translateZ
   const imageTranslateZ = useTransform(
-    mouseYSpring, // Based on vertical mouse position
+    mouseYSpring,
     [-0.5, 0.5],
-    [10, -10] // Move image 10px forward/backward
+    [25, -25] // Increased depth for dramatic effect
   );
   const footerTranslateZ = useTransform(
-    mouseXSpring, // Based on horizontal mouse position
+    mouseXSpring,
     [-0.5, 0.5],
-    [5, -5] // Move footer 5px forward/backward
+    [15, -15] // Enhanced footer depth
+  );
+
+  // Add perspective tilt for ultra-modern look
+  const imageTiltX = useTransform(
+    mouseYSpring,
+    [-0.5, 0.5],
+    [5, -5]
+  );
+  const footerTiltY = useTransform(
+    mouseXSpring,
+    [-0.5, 0.5],
+    [-3, 3]
   );
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -74,7 +89,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ item, itemVariants }) => {
   const motionStyle = {
     rotateX,
     rotateY,
-    transformStyle: "preserve-3d" as "preserve-3d", // Ensure correct type
+    transformStyle: "preserve-3d" as "preserve-3d",
+    perspective: 1000, // Add perspective for depth
   };
 
   const staticStyle = {
@@ -90,13 +106,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ item, itemVariants }) => {
     <motion.article
       ref={cardRef}
       variants={itemVariants} // Use itemVariants for entry animation
-      whileHover={{ scale: 1.05, y: -8, boxShadow: `0 20px 30px ${BOX_SHADOW_COLOR}` }} // Faster, stronger hover
+      whileHover={{ scale: 1.08, y: -12, boxShadow: `0 25px 50px ${BOX_SHADOW_COLOR}` }} // More dramatic hover
       transition={{ duration: 0.2, ease: "easeOut" }} // Smooth and fast transition
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={() => handleCardClick(item.url)}
       style={{ ...motionStyle, ...staticStyle }} // Combine styles
-      className="group relative flex flex-col w-[300px] rounded-[20px] overflow-hidden border-2 transition-all duration-200 cursor-pointer"
+      className="group relative flex flex-col w-75 rounded-4xl overflow-hidden border-2 transition-all duration-200 cursor-pointer"
     >
       {/* Shining effect - animated gradient */}
       <div className="absolute inset-0 pointer-events-none z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -119,18 +135,26 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ item, itemVariants }) => {
         }}
       />
       
-      {/* Image section */}
-      <motion.div // Changed to motion.div
+      {/* Image section with enhanced 3D tilt */}
+      <motion.div
         className="relative z-10 flex-1 p-[10px] box-border"
-        style={{ z: imageTranslateZ, transformStyle: "preserve-3d" }} // Apply z instead of translateZ
+        style={{ 
+          z: imageTranslateZ, 
+          rotateX: imageTiltX,
+          transformStyle: "preserve-3d" 
+        }}
       >
-        <img src={item.image} alt={item.title} loading="lazy" className="w-full h-full object-cover rounded-[10px]" />
+        <img src={item.image} alt={item.title} loading="lazy" className="w-full h-full object-cover rounded-[10px] shadow-lg" />
       </motion.div>
       
-      {/* Footer section */}
-      <motion.footer // Changed to motion.footer
+      {/* Footer section with enhanced 3D tilt */}
+      <motion.footer
         className="relative z-10 p-3 text-white font-sans grid grid-cols-[1fr_auto] gap-x-3 gap-y-1"
-        style={{ z: footerTranslateZ, transformStyle: "preserve-3d" }} // Apply z instead of translateZ
+        style={{ 
+          z: footerTranslateZ, 
+          rotateY: footerTiltY,
+          transformStyle: "preserve-3d" 
+        }}
       >
         <h3 className="m-0 text-[1.05rem] font-semibold">{item.title}</h3>
         {item.handle && <span className="text-[0.95rem] opacity-80 text-right">{item.handle}</span>}
