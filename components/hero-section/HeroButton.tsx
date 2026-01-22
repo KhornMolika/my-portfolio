@@ -99,7 +99,7 @@ export default function HeroButton({
       >
         {/* 3D depth layers */}
         <motion.div
-          className="absolute inset-0 rounded-xl bg-gradient-to-br from-black/20 to-transparent"
+          className="absolute inset-0 rounded-xl bg-linear-to-br from-black/20 to-transparent"
           style={{
             transform: "translateZ(-8px)",
             transformStyle: "preserve-3d",
@@ -107,7 +107,7 @@ export default function HeroButton({
         />
         
         <motion.div
-          className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/10 to-transparent"
+          className="absolute inset-0 rounded-xl bg-linear-to-br from-white/10 to-transparent"
           style={{
             transform: "translateZ(-4px)",
             transformStyle: "preserve-3d",
@@ -116,7 +116,7 @@ export default function HeroButton({
 
         {/* Shimmer effect */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+          className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent"
           initial={{ x: "-100%" }}
           whileHover={{ x: "100%" }}
           transition={{ duration: 0.6 }}
@@ -135,7 +135,7 @@ export default function HeroButton({
         {/* Glow effect */}
         {variant === "primary" && (
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-[#6F8F7A] to-[#C6A15B] opacity-0 blur-xl"
+            className="absolute inset-0 bg-linear-to-r from-[#6F8F7A] to-[#C6A15B] opacity-0 blur-xl"
             whileHover={{ opacity: 0.6 }}
             transition={{ duration: 0.3 }}
             style={{ transform: "translateZ(-12px)" }}

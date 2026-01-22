@@ -176,9 +176,18 @@ export default function HeroContent() {
       const dot = statsRef.current?.querySelector(".pulse-dot");
       if (dot) {
         gsap.to(dot, {
-          scale: 1.4,
-          opacity: 0.5,
-          duration: 2,
+          scale: 1.6,
+          opacity: 0.3,
+          duration: 1.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+
+        gsap.to(dot, {
+          boxShadow:
+            "0 0 20px rgba(52, 211, 153, 0.8), 0 0 40px rgba(52, 211, 153, 0.4)",
+          duration: 1.5,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
@@ -188,8 +197,8 @@ export default function HeroContent() {
       const locationIcon = statsRef.current?.querySelector(".location-icon");
       if (locationIcon) {
         gsap.to(locationIcon, {
-          rotationY: 20,
-          duration: 4,
+          y: -4,
+          duration: 2.5,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
@@ -234,6 +243,33 @@ export default function HeroContent() {
     });
   };
 
+  const handleAvailableHover = (element: HTMLElement, isHovering: boolean) => {
+    gsap.to(element, {
+      z: isHovering ? 40 : 0,
+      scale: isHovering ? 1.05 : 1,
+      duration: 0.4,
+      ease: "expo.out",
+    });
+  };
+
+  const handleLocationHover = (element: HTMLElement, isHovering: boolean) => {
+    gsap.to(element, {
+      z: isHovering ? 40 : 0,
+      scale: isHovering ? 1.05 : 1,
+      duration: 0.4,
+      ease: "expo.out",
+    });
+    
+    const locationIcon = element.querySelector(".location-icon");
+    if (locationIcon) {
+      gsap.to(locationIcon, {
+        rotationY: isHovering ? 360 : 0,
+        duration: 0.6,
+        ease: "expo.out",
+      });
+    }
+  };
+
   return (
     <>
       <link
@@ -254,15 +290,9 @@ export default function HeroContent() {
             ref={floatingRef}
             className="absolute inset-0 pointer-events-none -z-10"
           >
-            <div
-              className="absolute -left-32 top-32 w-64 h-64 bg-gradient-to-br from-[#6F8F7A]/15 via-[#C6A15B]/10 to-transparent rounded-full blur-3xl"
-            />
-            <div
-              className="absolute -right-32 bottom-32 w-80 h-80 bg-gradient-to-br from-[#C6A15B]/15 via-[#6F8F7A]/10 to-transparent rounded-full blur-3xl"
-            />
-            <div
-              className="absolute left-1/2 top-1/2 w-48 h-48 bg-gradient-to-br from-[#6F8F7A]/10 to-[#C6A15B]/5 rounded-full blur-3xl"
-            />
+            <div className="absolute -left-32 top-32 w-64 h-64 bg-linear-to-br from-[#6F8F7A]/15 via-[#C6A15B]/10 to-transparent rounded-full blur-3xl" />
+            <div className="absolute -right-32 bottom-32 w-80 h-80 bg-linear-to-br from-[#C6A15B]/15 via-[#6F8F7A]/10 to-transparent rounded-full blur-3xl" />
+            <div className="absolute left-1/2 top-1/2 w-48 h-48 bg-linear-to-br from-[#6F8F7A]/10 to-[#C6A15B]/5 rounded-full blur-3xl" />
           </div>
 
           <div
@@ -272,7 +302,7 @@ export default function HeroContent() {
             {[...Array(12)].map((_, i) => (
               <div
                 key={i}
-                className="absolute w-1 h-1 bg-gradient-to-r from-[#6F8F7A] to-[#C6A15B] rounded-full"
+                className="absolute w-1 h-1 bg-linear-to-r from-[#6F8F7A] to-[#C6A15B] rounded-full"
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
@@ -384,7 +414,7 @@ export default function HeroContent() {
             <span className="text-sm text-slate-400 font-light tracking-wider">
               CONNECT
             </span>
-            <div className="h-px w-8 bg-gradient-to-r from-slate-600 to-transparent" />
+            <div className="h-px w-8 bg-linear-to-r from-slate-600 to-transparent" />
             <div
               className="flex gap-3"
               style={{ transformStyle: "preserve-3d" }}
@@ -419,16 +449,24 @@ export default function HeroContent() {
             className="flex flex-wrap gap-6 sm:gap-8 pt-4"
             style={{ transformStyle: "preserve-3d" }}
           >
-            <div className="flex items-center gap-2">
-              <div
-                className="pulse-dot w-2 h-2 rounded-full bg-emerald-400"
-              />
+            <div 
+              className="flex items-center gap-2 cursor-pointer"
+              style={{ transformStyle: "preserve-3d" }}
+              onMouseEnter={(e) => handleAvailableHover(e.currentTarget, true)}
+              onMouseLeave={(e) => handleAvailableHover(e.currentTarget, false)}
+            >
+              <div className="pulse-dot w-2 h-2 rounded-full bg-emerald-400" />
               <span className="text-sm text-slate-400 font-light">
                 Available for freelance
               </span>
             </div>
             <div className="h-4 w-px bg-slate-700" />
-            <div className="text-sm text-slate-400 font-light flex items-center gap-2">
+            <div 
+              className="text-sm text-slate-400 font-light flex items-center gap-2 cursor-pointer"
+              style={{ transformStyle: "preserve-3d" }}
+              onMouseEnter={(e) => handleLocationHover(e.currentTarget, true)}
+              onMouseLeave={(e) => handleLocationHover(e.currentTarget, false)}
+            >
               <div
                 className="location-icon"
                 style={{ transformStyle: "preserve-3d" }}
