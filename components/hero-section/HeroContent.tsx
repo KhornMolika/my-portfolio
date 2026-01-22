@@ -82,11 +82,17 @@ export default function HeroContent() {
           { opacity: 1, y: 0, z: 0, duration: 1.2 },
           "-=1",
         )
+        // "Writing" animation for the name starts after it has moved into place
+        .from(nameRef.current, {
+          clipPath: "inset(0 100% 0 0)",
+          duration: 1.5,
+          ease: "power2.inOut",
+        }, "-=0.2") // Starts slightly before the previous animation ends for a subtle overlap
         .fromTo(
           lineRef.current,
           { scaleX: 0, opacity: 0, transformOrigin: "left" },
           { scaleX: 1, opacity: 1, duration: 1, ease: "power3.inOut" },
-          "-=0.8",
+          "-=0.5", // Starts as the name is almost fully "written"
         )
         .fromTo(
           descRef.current,

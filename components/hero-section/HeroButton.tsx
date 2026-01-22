@@ -105,7 +105,7 @@ export default function HeroButton({
       
       {/* Glass highlight top edge */}
       <motion.div
-        className="absolute top-0 left-0 right-0 h-[1px] rounded-full"
+        className="absolute top-0 left-0 right-0 h-px rounded-full"
         style={{
           background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)",
           transform: "translateZ(12px)",
@@ -174,7 +174,7 @@ export default function HeroButton({
 
       {/* Glass inner glow */}
       <motion.div
-        className="absolute inset-[2px] rounded-2xl"
+        className="absolute inset-0.5 rounded-2xl"
         style={{
           background: "radial-gradient(circle at 50% 0%, rgba(255,255,255,0.15), transparent 70%)",
           transform: "translateZ(2px)",

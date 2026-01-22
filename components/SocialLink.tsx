@@ -238,7 +238,7 @@ export default function SocialLink({
 
           {/* Subtle inner border */}
           <motion.div
-            className="absolute inset-[1px] rounded-2xl border border-white/[0.05] pointer-events-none"
+            className="absolute inset-px rounded-2xl border border-white/5 pointer-events-none"
             style={{
               transform: "translateZ(5px)",
             }}
