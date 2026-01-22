@@ -28,8 +28,8 @@ const ActiveLink: React.FC<ActiveLinkProps> = ({
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateXValue = ((y - centerY) / centerY) * -8;
-    const rotateYValue = ((x - centerX) / centerX) * 8;
+    const rotateXValue = ((y - centerY) / centerY) * -10;
+    const rotateYValue = ((x - centerX) / centerX) * 10;
 
     setRotateX(rotateXValue);
     setRotateY(rotateYValue);
@@ -79,7 +79,7 @@ const ActiveLink: React.FC<ActiveLinkProps> = ({
           transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
           transformStyle: "preserve-3d",
         }}
-        whileHover={{ z: 15, scale: 1.05 }}
+        whileHover={{ z: 20, scale: 1.05 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
         className="relative"
       >
@@ -94,7 +94,7 @@ const ActiveLink: React.FC<ActiveLinkProps> = ({
             className="relative z-10 transition-all duration-300 group-hover:text-white"
             style={{
               textShadow: isActive
-                ? "0 1px 4px rgba(0,0,0,0.15)"
+                ? "0 2px 8px rgba(0,0,0,0.3)"
                 : "none",
             }}
           >
@@ -103,15 +103,18 @@ const ActiveLink: React.FC<ActiveLinkProps> = ({
           {isActive && (
             <motion.div
               layoutId="active-pill"
-              className="absolute inset-0 bg-gradient-to-r from-[#6F8F7A] to-[#C6A15B] rounded-full -z-10 blur-sm"
-              style={{ transform: "translateZ(-5px)" }}
+              className="absolute inset-0 bg-gradient-to-r from-[#6F8F7A] to-[#C6A15B] rounded-full -z-10"
+              style={{ 
+                transform: "translateZ(-5px)",
+                boxShadow: "0 0 12px rgba(198, 161, 91, 0.6)",
+              }}
             />
           )}
           <motion.div
             className="absolute inset-0 rounded-full -z-20"
             style={{
               background:
-                "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)",
+                "linear-gradient(135deg, rgba(111, 143, 122, 0.2) 0%, rgba(198, 161, 91, 0.1) 100%)",
               transform: "translateZ(-10px)",
             }}
             initial={{ opacity: 0 }}

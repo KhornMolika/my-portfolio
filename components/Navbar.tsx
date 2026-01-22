@@ -55,7 +55,7 @@ const Navbar: React.FC<NavbarProps> = ({ items }) => {
     <ActiveLink
       key={item.label}
       href={item.href}
-      className="relative text-gray-300 transition-colors px-3 py-1.5"
+      className="relative text-gray-300 transition-colors px-3 py-1.5 font-semibold"
       activeClassName="text-white"
     >
       {item.label}
