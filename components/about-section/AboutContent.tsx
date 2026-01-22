@@ -45,7 +45,7 @@ export default function AboutContent() {
         About Me
       </motion.h2>
 
-      <motion.div variants={itemVariants}>
+      <motion.div variants={itemVariants} className="h-64">
         <TextType
           text={fullDescription}
           typingSpeed={50}

@@ -114,9 +114,9 @@ function Band({
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
-  useSphericalJoint(j3, card, [
+          useSphericalJoint(j3, card, [
     [0, 0, 0],
-    [0, 1.125, 0],
+    [0, 1.35, 0],
   ]);
 
   useFrame((state) => {
@@ -200,14 +200,14 @@ function Band({
           restitution={0}
           type={dragged ? "kinematicPosition" : "dynamic"}
         >
-          <CuboidCollider args={[0.8, 1.125, 0.01]} />
+          <CuboidCollider args={[0.96, 1.35, 0.01]} />
           {/* Front side */}
           <mesh
             position={[0, 0, 0.01]}
             onPointerUp={handlePointerUp}
             onPointerDown={handlePointerDown}
           >
-            <planeGeometry args={[0.8 * 2, 1.125 * 2]} />
+            <planeGeometry args={[1.92, 2.7]} />
             <meshBasicMaterial
               transparent
               opacity={frontImage ? 1 : cardOpacity}
@@ -222,8 +222,7 @@ function Band({
             onPointerUp={handlePointerUp}
             onPointerDown={handlePointerDown}
           >
-            <planeGeometry args={[0.8 * 2, 1.125 * 2]} />
-            <meshBasicMaterial
+            <planeGeometry args={[1.92, 2.7]} />            <meshBasicMaterial
               transparent
               opacity={backImage ? 1 : cardOpacity}
               color={backImage ? "white" : backCardColor}

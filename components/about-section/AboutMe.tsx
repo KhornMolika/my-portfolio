@@ -31,7 +31,7 @@ const AboutMe: React.FC = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ amount: 0.3 }}
-      className="w-full max-w-6xl mx-auto p-6"
+      className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 max-w-7xl"
     >
       <div
         className="relative rounded-3xl border-2 p-8 md:p-12 overflow-hidden"
