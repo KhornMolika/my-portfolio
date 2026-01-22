@@ -73,7 +73,7 @@ export default function HeroAvatar() {
       >
         {/* Glowing ring */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-[#6F8F7A] via-[#C6A15B] to-[#6F8F7A] rounded-full blur-2xl opacity-30"
+          className="absolute inset-0 bg-linear-to-r from-[#6F8F7A] via-[#C6A15B] to-[#6F8F7A] rounded-full blur-2xl opacity-30"
           animate={{
             scale: [1, 1.1, 1],
             opacity: [0.3, 0.4, 0.3],
@@ -117,7 +117,7 @@ export default function HeroAvatar() {
             sm:w-16 sm:h-16
             md:w-20 md:h-20
             lg:w-24 lg:h-24
-            bg-gradient-to-br from-[#C6A15B] via-[#D4B56E] to-[#6F8F7A] 
+            bg-linear-to-br from-[#C6A15B] via-[#D4B56E] to-[#6F8F7A] 
             rounded-xl sm:rounded-2xl shadow-lg shadow-[#C6A15B]/20
             opacity-70 sm:opacity-80"
           style={{ rotate: 12 }}
@@ -144,7 +144,7 @@ export default function HeroAvatar() {
             sm:w-14 sm:h-14
             md:w-16 md:h-16
             lg:w-20 lg:h-20
-            bg-gradient-to-br from-[#8BA992] to-[#6F8F7A]/40
+            bg-linear-to-br from-[#8BA992] to-[#6F8F7A]/40
             rounded-full shadow-md shadow-[#6F8F7A]/20
             opacity-50"
           animate={{
@@ -171,7 +171,7 @@ export default function HeroAvatar() {
             sm:w-20 sm:h-20
             md:w-24 md:h-24
             lg:w-32 lg:h-32
-            bg-gradient-to-br from-[#6F8F7A] via-[#8BA992] to-[#C6A15B]
+            bg-linear-to-br from-[#6F8F7A] via-[#8BA992] to-[#C6A15B]
             rounded-full shadow-xl shadow-[#6F8F7A]/30
             opacity-60 sm:opacity-70"
           animate={{
@@ -198,7 +198,7 @@ export default function HeroAvatar() {
             sm:w-12 sm:h-12
             md:w-14 md:h-14
             lg:w-16 lg:h-16
-            bg-gradient-to-br from-[#C6A15B]/60 to-[#D4B56E]/40
+            bg-linear-to-br from-[#C6A15B]/60 to-[#D4B56E]/40
             rounded-lg sm:rounded-xl
             shadow-md shadow-[#C6A15B]/15
             opacity-60"
