@@ -10,16 +10,16 @@ export default function Home() {
       <section id="home">
         <HeroSection />
       </section>
-      <section id="about">
+      <section id="about" className="py-16 sm:py-20">
         <AboutMe />
       </section>
-      <section id="skills">
+      <section id="skills" className="py-16 sm:py-20">
         <ToolsTechnologies />
       </section>
-      <section id="projects">
+      <section id="projects" className="py-16 sm:py-20">
         <ProjectsSection />
       </section>
-      <section id="contact">
+      <section id="contact" className="py-16 sm:py-20">
         <ContactSection />
       </section>
     </main>
