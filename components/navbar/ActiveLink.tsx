@@ -18,6 +18,27 @@ const ActiveLink: React.FC<ActiveLinkProps> = ({
   activeClassName = "active",
 }) => {
   const [isActive, setIsActive] = useState(false);
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateXValue = ((y - centerY) / centerY) * -8;
+    const rotateYValue = ((x - centerX) / centerX) * 8;
+
+    setRotateX(rotateXValue);
+    setRotateY(rotateYValue);
+  };
+
+  const handleMouseLeave = () => {
+    setRotateX(0);
+    setRotateY(0);
+  };
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -45,19 +66,59 @@ const ActiveLink: React.FC<ActiveLinkProps> = ({
 
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className="relative"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        perspective: "500px",
+        transformStyle: "preserve-3d",
+      }}
     >
-      <Link href={href} onClick={handleScroll} className={`${className} ${isActive ? activeClassName : ""}`}>
-        {children}
-        {isActive && (
+      <motion.div
+        style={{
+          transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+          transformStyle: "preserve-3d",
+        }}
+        whileHover={{ z: 15, scale: 1.05 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="relative"
+      >
+        <Link
+          href={href}
+          onClick={handleScroll}
+          className={`${className} ${
+            isActive ? activeClassName : ""
+          } transition-all duration-300 group`}
+        >
+          <span
+            className="relative z-10 transition-all duration-300 group-hover:text-white"
+            style={{
+              textShadow: isActive
+                ? "0 1px 4px rgba(0,0,0,0.15)"
+                : "none",
+            }}
+          >
+            {children}
+          </span>
+          {isActive && (
+            <motion.div
+              layoutId="active-pill"
+              className="absolute inset-0 bg-gradient-to-r from-[#6F8F7A] to-[#C6A15B] rounded-full -z-10 blur-sm"
+              style={{ transform: "translateZ(-5px)" }}
+            />
+          )}
           <motion.div
-            layoutId="active-pill"
-            className="absolute inset-0 bg-zinc-800/50 rounded-full -z-10"
+            className="absolute inset-0 rounded-full -z-20"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)",
+              transform: "translateZ(-10px)",
+            }}
+            initial={{ opacity: 0 }}
+            whileHover={{ opacity: 1 }}
           />
-        )}
-      </Link>
+        </Link>
+      </motion.div>
     </motion.div>
   );
 };

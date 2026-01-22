@@ -18,6 +18,28 @@ export interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ items }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateXValue = ((y - centerY) / centerY) * -8;
+    const rotateYValue = ((x - centerX) / centerX) * 8;
+
+    setRotateX(rotateXValue);
+    setRotateY(rotateYValue);
+  };
+
+  const handleMouseLeave = () => {
+    setRotateX(0);
+    setRotateY(0);
+  };
+
 
   // Animate various properties on scroll
   const navBg = useTransform(scrollY, [0, 100], ["rgba(15, 46, 38, 0)", "rgba(15, 46, 38, 0.5)"]);
@@ -56,9 +78,34 @@ const Navbar: React.FC<NavbarProps> = ({ items }) => {
       className="fixed left-1/2 -translate-x-1/2 z-50"
     >
       <div className="flex justify-between items-center w-full">
-        <Link href="/" className="text-white font-bold text-xl">
-          Khorn Molika
-        </Link>
+        <motion.div
+          className="relative"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            perspective: "500px",
+            transformStyle: "preserve-3d",
+          }}
+        >
+          <motion.div
+            style={{
+              transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+            }}
+            whileHover={{ z: 15, scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
+            <Link
+              href="/"
+              className="text-white font-bold text-2xl"
+              style={{
+                fontFamily: "'Ephesis', cursive",
+                textShadow: "0 2px 8px rgba(0,0,0,0.3)",
+              }}
+            >
+              Khorn Molika
+            </Link>
+          </motion.div>
+        </motion.div>
         <div className="hidden md:flex items-center gap-4 relative">
           {navLinks}
         </div>
@@ -82,6 +129,10 @@ const Navbar: React.FC<NavbarProps> = ({ items }) => {
           </motion.div>
         )}
       </AnimatePresence>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Ephesis&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
     </motion.nav>
   );
 };
