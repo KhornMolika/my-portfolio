@@ -42,14 +42,15 @@ const Navbar: React.FC<NavbarProps> = ({ items }) => {
 
 
   // Animate various properties on scroll
-  const navBg = useTransform(scrollY, [0, 100], ["rgba(15, 46, 38, 0)", "rgba(15, 46, 38, 0.5)"]);
-  const navBackdropFilter = useTransform(scrollY, [0, 100], ["blur(0px)", "blur(16px)"]);
-  const navBorder = useTransform(scrollY, [0, 100], ["1px solid rgba(255, 255, 255, 0)", "1px solid rgba(255, 255, 255, 0.1)"]);
-  const navBoxShadow = useTransform(scrollY, [0, 100], ["0 0 0 rgba(0,0,0,0)", "0 4px 30px rgba(0,0,0,0.1)"]);
-  const navBorderRadius = useTransform(scrollY, [0, 100], ["0px", "12px"]);
-  const navWidth = useTransform(scrollY, [0, 100], ["100%", "80%"]);
+  const navBg = useTransform(scrollY, [0, 100], ["rgba(15, 46, 38, 0)", "rgba(15, 46, 38, 0.6)"]);
+  const navBackdropFilter = useTransform(scrollY, [0, 100], ["blur(0px)", "blur(24px)"]);
+  const navBorder = useTransform(scrollY, [0, 100], ["1px solid rgba(255, 255, 255, 0)", "1px solid rgba(255, 255, 255, 0.15)"]);
+  const navBoxShadow = useTransform(scrollY, [0, 100], ["0 0 0 rgba(0,0,0,0)", "0 8px 30px rgba(0,0,0,0.2)"]);
+  const navBorderRadius = useTransform(scrollY, [0, 100], ["0px", "16px"]);
+  const navWidth = useTransform(scrollY, [0, 100], ["100%", "90%"]);
   const navTop = useTransform(scrollY, [0, 100], ["0px", "16px"]);
-  const navPadding = useTransform(scrollY, [0, 100], ["24px", "16px"]);
+  const navPadding = useTransform(scrollY, [0, 100], ["20px", "12px"]);
+  const layersOpacity = useTransform(scrollY, [0, 50], [0, 1]);
 
   const navLinks = items.map((item) => (
     <ActiveLink
@@ -77,6 +78,57 @@ const Navbar: React.FC<NavbarProps> = ({ items }) => {
       }}
       className="fixed left-1/2 -translate-x-1/2 z-50"
     >
+      {/* Frosted glass background layer */}
+      <motion.div
+        className="absolute inset-0 rounded-xl"
+        style={{
+          opacity: layersOpacity,
+          background: "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)",
+          transform: "translateZ(-15px)",
+          transformStyle: "preserve-3d",
+          backdropFilter: "blur(20px)",
+        }}
+      />
+      
+      {/* Top edge highlight */}
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-[1px] rounded-full"
+        style={{
+          opacity: layersOpacity,
+          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)",
+          transform: "translateZ(-10px)",
+        }}
+      />
+
+      {/* Subtle animated shimmer */}
+      <motion.div
+        className="absolute inset-0 rounded-xl"
+        style={{
+          opacity: layersOpacity,
+          background: "linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%)",
+          backgroundSize: "200% 100%",
+          transform: "translateZ(-5px)",
+        }}
+        animate={{
+          backgroundPosition: ["200% 0%", "-200% 0%"],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+
+      {/* Inner glass highlight */}
+      <motion.div
+        className="absolute inset-[2px] rounded-xl"
+        style={{
+          opacity: layersOpacity,
+          background: "radial-gradient(circle at 50% 0%, rgba(255,255,255,0.08), transparent 70%)",
+          transform: "translateZ(-20px)",
+        }}
+      />
+
       <div className="flex justify-between items-center w-full">
         <motion.div
           className="relative"
