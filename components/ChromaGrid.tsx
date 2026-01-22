@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 // Removed 'motion' import
 // Removed 'itemVariants' definition
@@ -33,7 +33,7 @@ type SetterFn = (v: number | string) => void;
 const ChromaGrid: React.FC<ChromaGridProps> = ({
   items,
   className = '',
-  radius = 300,
+  radius: defaultRadius = 300,
   damping = 0.45,
   fadeOut = 0.6,
   ease = 'power3.out',
@@ -44,6 +44,22 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
   const setX = useRef<SetterFn | null>(null);
   const setY = useRef<SetterFn | null>(null);
   const pos = useRef({ x: 0, y: 0 });
+  const [radius, setRadius] = useState(defaultRadius);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setRadius(150);
+      } else {
+        setRadius(defaultRadius);
+      }
+    };
+
+    handleResize(); // Set initial radius
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [defaultRadius]);
 
   const demo: ChromaItem[] = [
     {

@@ -19,7 +19,7 @@
 
 # production
 /build
-
+push.sh
 # misc
 .DS_Store
 *.pem

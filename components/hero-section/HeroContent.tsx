@@ -56,92 +56,159 @@ export default function HeroContent() {
         });
       }
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%",
-          toggleActions: "restart none restart reset",
-        },
-        defaults: { ease: "expo.out" },
+      gsap.matchMedia().add("(min-width: 768px)", () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 70%",
+            toggleActions: "restart none restart reset",
+          },
+          defaults: { ease: "expo.out" },
+        });
+
+        tl.fromTo(
+          avatarRef.current,
+          { opacity: 0, rotationY: -180, z: -400, scale: 0.5 },
+          { opacity: 1, rotationY: 0, z: 0, scale: 1, duration: 1.5 },
+        )
+          .fromTo(
+            greetingRef.current,
+            { opacity: 0, x: -100, z: -200 },
+            { opacity: 1, x: 0, z: 0, duration: 1.2 },
+            "-=1.1",
+          )
+          .fromTo(
+            nameRef.current,
+            { opacity: 0, y: 80, z: -200 },
+            { opacity: 1, y: 0, z: 0, duration: 1.2 },
+            "-=1",
+          )
+          .from(nameRef.current, {
+            clipPath: "inset(0 100% 0 0)",
+            duration: 1.5,
+            ease: "power2.inOut",
+          }, "-=0.2")
+          .fromTo(
+            lineRef.current,
+            { scaleX: 0, opacity: 0, transformOrigin: "left" },
+            { scaleX: 1, opacity: 1, duration: 1, ease: "power3.inOut" },
+            "-=0.5",
+          )
+          .fromTo(
+            descRef.current,
+            { opacity: 0, y: 40, z: -100 },
+            { opacity: 1, y: 0, z: 0, duration: 1, ease: "power3.out" },
+            "-=0.7",
+          );
+
+        if (buttonsRef.current?.children) {
+          tl.fromTo(
+            buttonsRef.current.children,
+            { opacity: 0, y: 50, z: -150, scale: 0.9 },
+            {
+              opacity: 1,
+              y: 0,
+              z: 0,
+              scale: 1,
+              duration: 1,
+              stagger: 0.15,
+            },
+            "-=0.7",
+          );
+        }
+
+        tl.fromTo(
+          socialRef.current,
+          { opacity: 0, x: -60, z: -100 },
+          { opacity: 1, x: 0, z: 0, duration: 0.9, ease: "power3.out" },
+          "-=0.7",
+        ).fromTo(
+          statsRef.current,
+          { opacity: 0, y: 30, z: -80 },
+          { opacity: 1, y: 0, z: 0, duration: 0.8, ease: "power2.out" },
+          "-=0.6",
+        );
+
+        gsap.to(containerRef.current, {
+          rotationY: -5,
+          rotationX: 5,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5,
+          },
+        });
       });
 
-      tl.fromTo(
-        avatarRef.current,
-        { opacity: 0, rotationY: -180, z: -400, scale: 0.5 },
-        { opacity: 1, rotationY: 0, z: 0, scale: 1, duration: 1.5 },
-      )
+      gsap.matchMedia().add("(max-width: 767px)", () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            toggleActions: "restart none none none",
+          },
+          defaults: { ease: "power2.out" },
+        });
+
+        tl.fromTo(
+          avatarRef.current,
+          { opacity: 0, y: 50, scale: 0.8 },
+          { opacity: 1, y: 0, scale: 1, duration: 1 },
+        )
         .fromTo(
           greetingRef.current,
-          { opacity: 0, x: -100, z: -200 },
-          { opacity: 1, x: 0, z: 0, duration: 1.2 },
-          "-=1.1",
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 1 },
+          "-=0.8",
         )
         .fromTo(
           nameRef.current,
-          { opacity: 0, y: 80, z: -200 },
-          { opacity: 1, y: 0, z: 0, duration: 1.2 },
-          "-=1",
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 1 },
+          "-=0.8",
         )
-        // "Writing" animation for the name starts after it has moved into place
-        .from(nameRef.current, {
-          clipPath: "inset(0 100% 0 0)",
-          duration: 1.5,
-          ease: "power2.inOut",
-        }, "-=0.2") // Starts slightly before the previous animation ends for a subtle overlap
         .fromTo(
           lineRef.current,
-          { scaleX: 0, opacity: 0, transformOrigin: "left" },
+          { scaleX: 0, opacity: 0, transformOrigin: "center" },
           { scaleX: 1, opacity: 1, duration: 1, ease: "power3.inOut" },
-          "-=0.5", // Starts as the name is almost fully "written"
+          "-=0.5",
         )
         .fromTo(
           descRef.current,
-          { opacity: 0, y: 40, z: -100 },
-          { opacity: 1, y: 0, z: 0, duration: 1, ease: "power3.out" },
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
           "-=0.7",
         );
 
-      if (buttonsRef.current?.children) {
+        if (buttonsRef.current?.children) {
+          tl.fromTo(
+            buttonsRef.current.children,
+            { opacity: 0, y: 30, scale: 0.95 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.8,
+              stagger: 0.1,
+            },
+            "-=0.7",
+          );
+        }
+
         tl.fromTo(
-          buttonsRef.current.children,
-          { opacity: 0, y: 50, z: -150, scale: 0.9 },
-          {
-            opacity: 1,
-            y: 0,
-            z: 0,
-            scale: 1,
-            duration: 1,
-            stagger: 0.15,
-          },
+          socialRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
           "-=0.7",
+        ).fromTo(
+          statsRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+          "-=0.6",
         );
-      }
-
-      tl.fromTo(
-        socialRef.current,
-        { opacity: 0, x: -60, z: -100 },
-        { opacity: 1, x: 0, z: 0, duration: 0.9, ease: "power3.out" },
-        "-=0.7",
-      ).fromTo(
-        statsRef.current,
-        { opacity: 0, y: 30, z: -80 },
-        { opacity: 1, y: 0, z: 0, duration: 0.8, ease: "power2.out" },
-        "-=0.6",
-      );
-
-      // Scroll-based parallax for the container
-      gsap.to(containerRef.current, {
-        rotationY: -5,
-        rotationX: 5,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.5,
-        },
       });
 
-      // Looping background animations
       if (floatingRef.current?.children) {
         gsap.to(floatingRef.current.children[0], {
           y: -30,
@@ -219,8 +286,11 @@ export default function HeroContent() {
     duration: 0.4,
     ease: "expo.out",
   };
+  
+  const isDesktop = () => window.matchMedia("(min-width: 768px)").matches;
 
   const handleAvatarHover = (isHovering: boolean) => {
+    if (!isDesktop()) return;
     gsap.to(avatarRef.current, {
       z: isHovering ? 50 : 0,
       scale: isHovering ? 1.05 : 1,
@@ -229,6 +299,7 @@ export default function HeroContent() {
   };
 
   const handleNameHover = (isHovering: boolean) => {
+    if (!isDesktop()) return;
     gsap.to(nameRef.current, {
       z: isHovering ? 40 : 0,
       scale: isHovering ? 1.03 : 1,
@@ -241,6 +312,7 @@ export default function HeroContent() {
     isHovering: boolean,
     direction: number,
   ) => {
+    if (!isDesktop()) return;
     gsap.to(element, {
       z: isHovering ? 50 : 0,
       rotationY: isHovering ? direction * 8 : 0,
@@ -250,6 +322,7 @@ export default function HeroContent() {
   };
 
   const handleAvailableHover = (element: HTMLElement, isHovering: boolean) => {
+    if (!isDesktop()) return;
     gsap.to(element, {
       z: isHovering ? 40 : 0,
       scale: isHovering ? 1.05 : 1,
@@ -259,6 +332,7 @@ export default function HeroContent() {
   };
 
   const handleLocationHover = (element: HTMLElement, isHovering: boolean) => {
+    if (!isDesktop()) return;
     gsap.to(element, {
       z: isHovering ? 40 : 0,
       scale: isHovering ? 1.05 : 1,
@@ -430,6 +504,7 @@ export default function HeroContent() {
                   key={platform}
                   style={{ transformStyle: "preserve-3d" }}
                   onMouseEnter={(e) => {
+                    if (!isDesktop()) return;
                     gsap.to(e.currentTarget, {
                       z: 40,
                       scale: 1.1,
@@ -437,6 +512,7 @@ export default function HeroContent() {
                     });
                   }}
                   onMouseLeave={(e) => {
+                    if (!isDesktop()) return;
                     gsap.to(e.currentTarget, {
                       z: 0,
                       scale: 1,

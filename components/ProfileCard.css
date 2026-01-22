@@ -129,7 +129,8 @@
   background: transparent;
   background-size: cover;
   background-position: center;
-  background-image: repeating-linear-gradient(
+  background-image:
+    repeating-linear-gradient(
       0deg,
       var(--sunpillar-clr-1) calc(var(--space) * 1),
       var(--sunpillar-clr-2) calc(var(--space) * 2),
@@ -154,10 +155,15 @@
       hsla(0, 0%, 0%, 0.15) 20%,
       hsla(0, 0%, 0%, 0.25) 120%
     );
-  background-position: 0 var(--background-y),
-    var(--background-x) var(--background-y), center;
+  background-position:
+    0 var(--background-y),
+    var(--background-x) var(--background-y),
+    center;
   background-blend-mode: color, hard-light;
-  background-size: 500% 500%, 300% 300%, 200% 200%;
+  background-size:
+    500% 500%,
+    300% 300%,
+    200% 200%;
   background-repeat: repeat;
 }
 
@@ -185,7 +191,7 @@
 }
 
 .pc-shine::before {
-  background-image: 
+  background-image:
     radial-gradient(
       circle at var(--pointer-x) var(--pointer-y),
       rgba(255, 255, 255, 0.35) 0%,
@@ -199,8 +205,11 @@
       transparent 45%
     ),
     var(--grain);
-  background-size: 180% 180%, 220% 220%, 220px 220px;
-  background-position: 
+  background-size:
+    180% 180%,
+    220% 220%,
+    220px 220px;
+  background-position:
     center,
     center,
     calc(var(--pointer-x) * 0.015) calc(var(--pointer-y) * 0.015);
@@ -211,9 +220,14 @@
 /* ==================================== */
 
 .pc-shine::after {
-  background-position: 0 var(--background-y),
-    calc(var(--background-x) * 0.4) calc(var(--background-y) * 0.5), center;
-  background-size: 200% 300%, 700% 700%, 100% 100%;
+  background-position:
+    0 var(--background-y),
+    calc(var(--background-x) * 0.4) calc(var(--background-y) * 0.5),
+    center;
+  background-size:
+    200% 300%,
+    700% 700%,
+    100% 100%;
   mix-blend-mode: difference;
   filter: brightness(0.8) contrast(1.5);
 }
@@ -407,11 +421,17 @@
 
 @keyframes holo-bg {
   0% {
-    background-position: 0 var(--background-y), 0 0, center;
+    background-position:
+      0 var(--background-y),
+      0 0,
+      center;
   }
 
   100% {
-    background-position: 0 var(--background-y), 90% 90%, center;
+    background-position:
+      0 var(--background-y),
+      90% 90%,
+      center;
   }
 }
 

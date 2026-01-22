@@ -69,16 +69,18 @@ export default function HeroAvatar() {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{ transformStyle: "preserve-3d" }}
-        className="relative w-full max-w-sm sm:max-w-md lg:max-w-none flex items-center justify-center lg:justify-end"
+        className="relative w-full flex items-center justify-center lg:justify-end"
       >
         {/* Glowing ring */}
         <motion.div
-          className="absolute inset-0 bg-linear-to-r from-[#6F8F7A] via-[#C6A15B] to-[#6F8F7A] rounded-full blur-2xl opacity-30"
+          className="absolute inset-0 bg-gradient-to-r from-[#6F8F7A] via-[#C6A15B] to-[#6F8F7A] rounded-full blur-2xl opacity-30"
           animate={{
             scale: [1, 1.1, 1],
             opacity: [0.3, 0.4, 0.3],
           }}
           transition={{
+            duration: 3,
+            repeat: Infinity,
             ease: "easeInOut",
           }}
         />
@@ -104,21 +106,25 @@ export default function HeroAvatar() {
         </motion.div>
 
         {/* Floating elements */}
-        {/* Top right floating square */}
+        {/* Top right floating square with enhanced mobile design */}
         <motion.div
           className="absolute -z-10 
-            -top-2 right-2
-            sm:-top-4 sm:right-6
-            md:-top-4 md:right-8
-            lg:-top-4 lg:right-0.5
+            top-0 right-4
+            sm:-top-2 sm:right-8
+            md:-top-4 md:right-12
+            lg:-top-6 lg:right-2
             w-12 h-12
             sm:w-16 sm:h-16
             md:w-20 md:h-20
             lg:w-24 lg:h-24
-            bg-linear-to-br from-[#C6A15B] to-[#6F8F7A] rounded-lg rotate-12 opacity-80"
+            bg-gradient-to-br from-[#C6A15B] via-[#D4B56E] to-[#6F8F7A] 
+            rounded-xl sm:rounded-2xl shadow-lg shadow-[#C6A15B]/20
+            opacity-70 sm:opacity-80"
+          style={{ rotate: 12 }}
           animate={{
-            y: [0, -20, 0],
+            y: [0, -15, 0],
             rotate: [12, 18, 12],
+            scale: [1, 1.05, 1],
           }}
           transition={{
             duration: 4,
@@ -127,28 +133,86 @@ export default function HeroAvatar() {
           }}
         />
 
-        {/* Bottom left floating circle */}
+        {/* Top left accent circle - only visible on sm+ */}
         <motion.div
           className="absolute -z-10
-            -bottom-4 left-2
-            sm:-bottom-6 sm:left-4
-            md:-bottom-6 md:left-12
-            lg:-bottom-6 lg:left-20
-            w-16 h-16
+            hidden sm:block
+            sm:top-8 sm:left-8
+            md:top-4 md:left-16
+            lg:top-0 lg:left-24
+            w-10 h-10
+            sm:w-14 sm:h-14
+            md:w-16 md:h-16
+            lg:w-20 lg:h-20
+            bg-gradient-to-br from-[#8BA992] to-[#6F8F7A]/40
+            rounded-full shadow-md shadow-[#6F8F7A]/20
+            opacity-50"
+          animate={{
+            y: [0, -10, 0],
+            scale: [1, 1.1, 1],
+            opacity: [0.5, 0.7, 0.5],
+          }}
+          transition={{
+            duration: 3.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5,
+          }}
+        />
+
+        {/* Bottom left floating circle with glow */}
+        <motion.div
+          className="absolute -z-10
+            bottom-2 left-4
+            sm:-bottom-4 sm:left-8
+            md:-bottom-6 md:left-16
+            lg:-bottom-8 lg:left-24
+            w-14 h-14
             sm:w-20 sm:h-20
             md:w-24 md:h-24
             lg:w-32 lg:h-32
-            bg-linear-to-br from-[#6F8F7A] to-[#C6A15B]
-            rounded-full opacity-60"
+            bg-gradient-to-br from-[#6F8F7A] via-[#8BA992] to-[#C6A15B]
+            rounded-full shadow-xl shadow-[#6F8F7A]/30
+            opacity-60 sm:opacity-70"
           animate={{
-            y: [0, 20, 0],
-            x: [0, -10, 0],
+            y: [0, 15, 0],
+            x: [0, -8, 0],
+            scale: [1, 1.08, 1],
           }}
           transition={{
             duration: 5,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 1,
+          }}
+        />
+
+        {/* Bottom right small accent - mobile friendly */}
+        <motion.div
+          className="absolute -z-10
+            bottom-8 right-6
+            sm:bottom-4 sm:right-12
+            md:bottom-0 md:right-16
+            lg:-bottom-2 lg:right-20
+            w-8 h-8
+            sm:w-12 sm:h-12
+            md:w-14 md:h-14
+            lg:w-16 lg:h-16
+            bg-gradient-to-br from-[#C6A15B]/60 to-[#D4B56E]/40
+            rounded-lg sm:rounded-xl
+            shadow-md shadow-[#C6A15B]/15
+            opacity-60"
+          style={{ rotate: -15 }}
+          animate={{
+            y: [0, 12, 0],
+            rotate: [-15, -20, -15],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 4.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
           }}
         />
       </div>

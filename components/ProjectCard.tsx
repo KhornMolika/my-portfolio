@@ -112,7 +112,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ item, itemVariants }) => {
       onMouseLeave={handleMouseLeave}
       onClick={() => handleCardClick(item.url)}
       style={{ ...motionStyle, ...staticStyle }} // Combine styles
-      className="group relative flex flex-col w-75 rounded-4xl overflow-hidden border-2 transition-all duration-200 cursor-pointer"
+      className="group relative flex flex-col w-72 rounded-4xl overflow-hidden border-2 transition-all duration-200 cursor-pointer"
     >
       {/* Shining effect - animated gradient */}
       <div className="absolute inset-0 pointer-events-none z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
