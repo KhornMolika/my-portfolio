@@ -1,7 +1,38 @@
+"use client";
+
 import { motion } from "framer-motion";
 import ProfileCard from "../ProfileCard";
+import { useRef } from "react";
+import gsap from "gsap";
 
 export default function HeroAvatar() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { clientX, clientY, currentTarget } = e;
+    const { left, top, width, height } = currentTarget.getBoundingClientRect();
+    const x = clientX - left;
+    const y = clientY - top;
+    const rotateX = gsap.utils.mapRange(0, height, -8, 8)(y);
+    const rotateY = gsap.utils.mapRange(0, width, 8, -8)(x);
+
+    gsap.to(containerRef.current, {
+      rotationX: rotateX,
+      rotationY: rotateY,
+      duration: 0.6,
+      ease: "power2.out",
+    });
+  };
+
+  const handleMouseLeave = () => {
+    gsap.to(containerRef.current, {
+      rotationX: 0,
+      rotationY: 0,
+      duration: 0.6,
+      ease: "elastic.out(1, 0.5)",
+    });
+  };
+
   const containerVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: {
@@ -33,7 +64,13 @@ export default function HeroAvatar() {
       viewport={{ amount: 0.3 }}
       className="relative w-full max-w-md lg:max-w-lg flex justify-center lg:justify-end mx-auto px-4 sm:px-6 lg:px-0"
     >
-      <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-none flex items-center justify-center lg:justify-end">
+      <div
+        ref={containerRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{ transformStyle: "preserve-3d" }}
+        className="relative w-full max-w-sm sm:max-w-md lg:max-w-none flex items-center justify-center lg:justify-end"
+      >
         {/* Glowing ring */}
         <motion.div
           className="absolute inset-0 bg-linear-to-r from-[#6F8F7A] via-[#C6A15B] to-[#6F8F7A] rounded-full blur-2xl opacity-30"
@@ -56,7 +93,7 @@ export default function HeroAvatar() {
             contactText="Contact Me"
             avatarUrl="/images/pixel.png"
             showUserInfo={true}
-            enableTilt={true}
+            enableTilt={false}
             enableMobileTilt={false}
             onContactClick={() => {
               document.getElementById("contact")?.scrollIntoView({
