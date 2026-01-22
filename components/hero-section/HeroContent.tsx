@@ -6,6 +6,7 @@ import SocialLink from "@/components/SocialLink";
 import ButtonCus from "@/components/hero-section/HeroButton";
 import HeroAvatarTag from "./HeroAvatarTag";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 type SocialPlatform = "github" | "linkedin" | "twitter" | "mail";
 
@@ -30,389 +31,193 @@ export default function HeroContent() {
   ];
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
     const ctx = gsap.context(() => {
-      // Set initial perspective with enhanced depth
       gsap.set(containerRef.current, {
-        perspective: 1500,
+        perspective: 1200,
         transformStyle: "preserve-3d",
       });
 
-      // Create floating particles animation
       const particles = particlesRef.current?.children;
       if (particles) {
-        Array.from(particles).forEach((particle, i) => {
+        Array.from(particles).forEach((particle) => {
           gsap.to(particle, {
-            y: `random(-100, 100)`,
-            x: `random(-100, 100)`,
+            y: `random(-80, 80)`,
+            x: `random(-80, 80)`,
             rotation: `random(0, 360)`,
-            opacity: `random(0.1, 0.4)`,
-            scale: `random(0.5, 1.5)`,
-            duration: `random(3, 6)`,
+            opacity: `random(0.2, 0.5)`,
+            scale: `random(0.6, 1.2)`,
+            duration: `random(4, 7)`,
             repeat: -1,
             yoyo: true,
             ease: "sine.inOut",
-            delay: i * 0.2,
           });
         });
       }
 
-      // Enhanced master timeline with professional timing
       const tl = gsap.timeline({
-        defaults: { ease: "power4.out" },
-        delay: 0.2,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 70%",
+          toggleActions: "restart none restart reset",
+        },
+        defaults: { ease: "expo.out" },
       });
 
-      // Avatar entrance - cinematic 3D flip with depth
       tl.fromTo(
         avatarRef.current,
-        {
-          opacity: 0,
-          rotationY: -180,
-          rotationX: 45,
-          z: -400,
-          scale: 0.3,
-        },
-        {
-          opacity: 1,
-          rotationY: 0,
-          rotationX: 0,
-          z: 0,
-          scale: 1,
-          duration: 1.6,
-          ease: "expo.out",
-        },
-      );
+        { opacity: 0, rotationY: -180, z: -400, scale: 0.5 },
+        { opacity: 1, rotationY: 0, z: 0, scale: 1, duration: 1.5 },
+      )
+        .fromTo(
+          greetingRef.current,
+          { opacity: 0, x: -100, z: -200 },
+          { opacity: 1, x: 0, z: 0, duration: 1.2 },
+          "-=1.1",
+        )
+        .fromTo(
+          nameRef.current,
+          { opacity: 0, y: 80, z: -200 },
+          { opacity: 1, y: 0, z: 0, duration: 1.2 },
+          "-=1",
+        )
+        .fromTo(
+          lineRef.current,
+          { scaleX: 0, opacity: 0, transformOrigin: "left" },
+          { scaleX: 1, opacity: 1, duration: 1, ease: "power3.inOut" },
+          "-=0.8",
+        )
+        .fromTo(
+          descRef.current,
+          { opacity: 0, y: 40, z: -100 },
+          { opacity: 1, y: 0, z: 0, duration: 1, ease: "power3.out" },
+          "-=0.7",
+        );
 
-      // Greeting text - smooth slide with rotation
-      tl.fromTo(
-        greetingRef.current,
-        {
-          opacity: 0,
-          x: -150,
-          rotationX: -60,
-          rotationZ: -10,
-          z: -200,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          rotationX: 0,
-          rotationZ: 0,
-          z: 0,
-          duration: 1.2,
-          ease: "expo.out",
-        },
-        "-=1",
-      );
-
-      // Name - premium multi-axis entrance
-      tl.fromTo(
-        nameRef.current,
-        {
-          opacity: 0,
-          y: 100,
-          rotationX: 60,
-          rotationY: -30,
-          rotationZ: 5,
-          z: -250,
-          scale: 0.6,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          rotationX: 0,
-          rotationY: 0,
-          rotationZ: 0,
-          z: 0,
-          scale: 1,
-          duration: 1.4,
-          ease: "elastic.out(1, 0.6)",
-        },
-        "-=0.8",
-      );
-
-      // Line - dynamic growth with shimmer
-      tl.fromTo(
-        lineRef.current,
-        {
-          scaleX: 0,
-          opacity: 0,
-          transformOrigin: "left center",
-        },
-        {
-          scaleX: 1,
-          opacity: 1,
-          duration: 1.2,
-          ease: "expo.inOut",
-        },
-        "-=0.8",
-      );
-
-      // Line shimmer effect
-      gsap.fromTo(
-        lineRef.current,
-        { backgroundPosition: "0% 50%" },
-        {
-          backgroundPosition: "200% 50%",
-          duration: 2,
-          repeat: -1,
-          ease: "linear",
-        },
-      );
-
-      // Description - elegant fade with depth
-      tl.fromTo(
-        descRef.current,
-        {
-          opacity: 0,
-          y: 50,
-          z: -150,
-          rotationX: 20,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          z: 0,
-          rotationX: 0,
-          duration: 1,
-          ease: "power3.out",
-        },
-        "-=0.6",
-      );
-
-      // Buttons - dynamic stagger with 3D depth
-      const buttons = buttonsRef.current?.children;
-      if (buttons) {
+      if (buttonsRef.current?.children) {
         tl.fromTo(
-          Array.from(buttons),
-          {
-            opacity: 0,
-            y: 60,
-            rotationX: 90,
-            z: -200,
-            scale: 0.8,
-          },
+          buttonsRef.current.children,
+          { opacity: 0, y: 50, z: -150, scale: 0.9 },
           {
             opacity: 1,
             y: 0,
-            rotationX: 0,
             z: 0,
             scale: 1,
             duration: 1,
-            stagger: {
-              each: 0.2,
-              ease: "power2.out",
-            },
-            ease: "back.out(1.5)",
+            stagger: 0.15,
           },
           "-=0.7",
         );
       }
 
-      // Social section - cascading entrance
       tl.fromTo(
         socialRef.current,
-        {
-          opacity: 0,
-          x: -80,
-          rotationY: -45,
-          z: -100,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          rotationY: 0,
-          z: 0,
-          duration: 0.9,
-          ease: "power3.out",
-        },
+        { opacity: 0, x: -60, z: -100 },
+        { opacity: 1, x: 0, z: 0, duration: 0.9, ease: "power3.out" },
+        "-=0.7",
+      ).fromTo(
+        statsRef.current,
+        { opacity: 0, y: 30, z: -80 },
+        { opacity: 1, y: 0, z: 0, duration: 0.8, ease: "power2.out" },
         "-=0.6",
       );
 
-      // Stats - final elegant entrance
-      tl.fromTo(
-        statsRef.current,
-        {
-          opacity: 0,
-          y: 40,
-          z: -80,
+      // Scroll-based parallax for the container
+      gsap.to(containerRef.current, {
+        rotationY: -5,
+        rotationX: 5,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.5,
         },
-        {
-          opacity: 1,
-          y: 0,
-          z: 0,
-          duration: 0.8,
-          ease: "power2.out",
-        },
-        "-=0.5",
-      );
+      });
 
-      // Continuous floating background animations
+      // Looping background animations
       if (floatingRef.current?.children) {
         gsap.to(floatingRef.current.children[0], {
-          y: -40,
-          x: 20,
-          rotationZ: 180,
-          scale: 1.2,
-          duration: 10,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
-
-        gsap.to(floatingRef.current.children[1], {
-          y: 40,
-          x: -20,
-          rotationZ: -180,
-          scale: 0.9,
+          y: -30,
+          x: 15,
+          rotation: 120,
           duration: 12,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
         });
-
+        gsap.to(floatingRef.current.children[1], {
+          y: 30,
+          x: -15,
+          rotation: -120,
+          duration: 14,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
         gsap.to(floatingRef.current.children[2], {
-          y: 25,
-          x: 30,
-          rotationZ: 90,
-          scale: 1.1,
-          duration: 9,
+          y: 20,
+          x: 25,
+          rotation: 60,
+          duration: 11,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
         });
       }
 
-      // Name gradient shimmer - multi-directional
       gsap.to(nameRef.current, {
-        backgroundPosition: "300% center",
-        duration: 4,
+        backgroundPosition: "200% center",
+        duration: 5,
         repeat: -1,
         ease: "linear",
       });
 
-      // Pulse dot - breathing effect
       const dot = statsRef.current?.querySelector(".pulse-dot");
       if (dot) {
         gsap.to(dot, {
-          scale: 1.5,
-          opacity: 0.4,
-          duration: 1.8,
+          scale: 1.4,
+          opacity: 0.5,
+          duration: 2,
           repeat: -1,
           yoyo: true,
-          ease: "power1.inOut",
-        });
-
-        // Glow ring around dot
-        gsap.to(dot, {
-          boxShadow: "0 0 20px 4px rgba(52, 211, 153, 0.6)",
-          duration: 1.8,
-          repeat: -1,
-          yoyo: true,
-          ease: "power1.inOut",
+          ease: "sine.inOut",
         });
       }
 
-      // MapPin - smooth 3D rotation with tilt
       const locationIcon = statsRef.current?.querySelector(".location-icon");
       if (locationIcon) {
         gsap.to(locationIcon, {
-          rotationY: 360,
-          rotationX: 15,
-          duration: 5,
+          rotationY: 20,
+          duration: 4,
           repeat: -1,
-          ease: "linear",
+          yoyo: true,
+          ease: "sine.inOut",
         });
       }
-
-      // Advanced mouse parallax with smooth tracking
-      let mouseX = 0;
-      let mouseY = 0;
-      let currentX = 0;
-      let currentY = 0;
-
-      const handleMouseMove = (e: MouseEvent) => {
-        const { clientX, clientY } = e;
-        const { innerWidth, innerHeight } = window;
-
-        mouseX = (clientX - innerWidth / 2) / innerWidth;
-        mouseY = (clientY - innerHeight / 2) / innerHeight;
-      };
-
-      // Smooth mouse tracking with lerp
-      const updateParallax = () => {
-        currentX += (mouseX - currentX) * 0.1;
-        currentY += (mouseY - currentY) * 0.1;
-
-        gsap.to(containerRef.current, {
-          rotationY: currentX * 12,
-          rotationX: -currentY * 12,
-          transformPerspective: 1500,
-          duration: 0.8,
-          ease: "power2.out",
-        });
-
-        // Multi-layer parallax
-        if (floatingRef.current?.children) {
-          gsap.to(floatingRef.current.children[0], {
-            x: currentX * 60,
-            y: currentY * 60,
-            rotationZ: currentX * 20,
-            duration: 1.2,
-            ease: "power1.out",
-          });
-
-          gsap.to(floatingRef.current.children[1], {
-            x: -currentX * 45,
-            y: -currentY * 45,
-            rotationZ: -currentX * 15,
-            duration: 1,
-            ease: "power1.out",
-          });
-
-          gsap.to(floatingRef.current.children[2], {
-            x: currentX * 35,
-            y: -currentY * 35,
-            rotationZ: currentX * 10,
-            duration: 0.9,
-            ease: "power1.out",
-          });
-        }
-
-        requestAnimationFrame(updateParallax);
-      };
-
-      window.addEventListener("mousemove", handleMouseMove);
-      updateParallax();
-
-      return () => {
-        window.removeEventListener("mousemove", handleMouseMove);
-      };
     });
 
     return () => ctx.revert();
   }, []);
 
-  // Enhanced hover handlers with professional easing
+  const hoverConfig = {
+    duration: 0.4,
+    ease: "expo.out",
+  };
+
   const handleAvatarHover = (isHovering: boolean) => {
     gsap.to(avatarRef.current, {
-      z: isHovering ? 80 : 0,
-      rotationY: isHovering ? 8 : 0,
-      rotationX: isHovering ? -5 : 0,
-      scale: isHovering ? 1.08 : 1,
-      duration: 0.6,
-      ease: "expo.out",
+      z: isHovering ? 50 : 0,
+      scale: isHovering ? 1.05 : 1,
+      ...hoverConfig,
     });
   };
 
   const handleNameHover = (isHovering: boolean) => {
     gsap.to(nameRef.current, {
-      z: isHovering ? 60 : 0,
+      z: isHovering ? 40 : 0,
       scale: isHovering ? 1.03 : 1,
-      rotationY: isHovering ? 3 : 0,
-      rotationX: isHovering ? -2 : 0,
-      duration: 0.7,
-      ease: "elastic.out(1, 0.5)",
+      ...hoverConfig,
     });
   };
 
@@ -422,12 +227,10 @@ export default function HeroContent() {
     direction: number,
   ) => {
     gsap.to(element, {
-      z: isHovering ? 80 : 0,
-      rotationX: isHovering ? -15 : 0,
-      rotationY: isHovering ? direction * 12 : 0,
-      scale: isHovering ? 1.08 : 1,
-      duration: 0.5,
-      ease: "expo.out",
+      z: isHovering ? 50 : 0,
+      rotationY: isHovering ? direction * 8 : 0,
+      scale: isHovering ? 1.05 : 1,
+      ...hoverConfig,
     });
   };
 
@@ -438,7 +241,7 @@ export default function HeroContent() {
         rel="stylesheet"
       />
 
-      <div style={{ perspective: "1500px", position: "relative" }}>
+      <div style={{ perspective: "1200px", position: "relative" }}>
         <div
           ref={containerRef}
           className="space-y-8 sm:space-y-10 w-full text-center lg:text-left flex flex-col items-center lg:items-start relative"
@@ -447,30 +250,24 @@ export default function HeroContent() {
             transformStyle: "preserve-3d",
           }}
         >
-          {/* Enhanced 3D Floating Background */}
           <div
             ref={floatingRef}
-            className="absolute inset-0 pointer-events-none overflow-hidden"
-            style={{ transformStyle: "preserve-3d" }}
+            className="absolute inset-0 pointer-events-none -z-10"
           >
             <div
-              className="absolute -left-32 top-32 w-64 h-64  rounded-full blur-3xl"
-              style={{ transformStyle: "preserve-3d" }}
+              className="absolute -left-32 top-32 w-64 h-64 bg-gradient-to-br from-[#6F8F7A]/15 via-[#C6A15B]/10 to-transparent rounded-full blur-3xl"
             />
             <div
-              className="absolute -right-32 bottom-32 w-80 h-80  to-transparent rounded-full blur-3xl"
-              style={{ transformStyle: "preserve-3d" }}
+              className="absolute -right-32 bottom-32 w-80 h-80 bg-gradient-to-br from-[#C6A15B]/15 via-[#6F8F7A]/10 to-transparent rounded-full blur-3xl"
             />
             <div
-              className="absolute left-1/2 top-1/2 w-48 h-48 rounded-full blur-3xl"
-              style={{ transformStyle: "preserve-3d" }}
+              className="absolute left-1/2 top-1/2 w-48 h-48 bg-gradient-to-br from-[#6F8F7A]/10 to-[#C6A15B]/5 rounded-full blur-3xl"
             />
           </div>
 
-          {/* Floating Particles */}
           <div
             ref={particlesRef}
-            className="absolute inset-0 pointer-events-none overflow-hidden"
+            className="absolute inset-0 pointer-events-none -z-10"
           >
             {[...Array(12)].map((_, i) => (
               <div
@@ -479,7 +276,6 @@ export default function HeroContent() {
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
-                  opacity: 0.2,
                 }}
               />
             ))}
@@ -508,11 +304,9 @@ export default function HeroContent() {
               ref={greetingRef}
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl
                  font-light text-white leading-[1.15] tracking-tight"
-              style={{ transformStyle: "preserve-3d" }}
             >
               Hi, I'm
             </h1>
-
             <h2
               ref={nameRef}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl
@@ -522,7 +316,7 @@ export default function HeroContent() {
                 transformStyle: "preserve-3d",
                 background:
                   "linear-gradient(90deg, #6F8F7A 0%, #C6A15B 25%, #6F8F7A 50%, #C6A15B 75%, #6F8F7A 100%)",
-                backgroundSize: "300% 100%",
+                backgroundSize: "200% 100%",
                 backgroundPosition: "0% center",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -533,7 +327,6 @@ export default function HeroContent() {
             >
               Khorn Molika
             </h2>
-
             <div
               ref={lineRef}
               className="h-0.5 rounded-full"
@@ -549,7 +342,6 @@ export default function HeroContent() {
           <p
             ref={descRef}
             className="text-sm sm:text-base md:text-md text-slate-300/90 leading-relaxed max-w-2xl font-light"
-            style={{ transformStyle: "preserve-3d" }}
           >
             Full-stack web developer passionate about building responsive,
             performant applications. Experienced in React, TypeScript, and
@@ -573,7 +365,6 @@ export default function HeroContent() {
                 Download Resume
               </ButtonCus>
             </div>
-
             <div
               onMouseEnter={(e) => handleButtonHover(e.currentTarget, true, 1)}
               onMouseLeave={(e) => handleButtonHover(e.currentTarget, false, 1)}
@@ -606,16 +397,14 @@ export default function HeroContent() {
                     gsap.to(e.currentTarget, {
                       z: 40,
                       scale: 1.1,
-                      duration: 0.4,
-                      ease: "expo.out",
+                      ...hoverConfig,
                     });
                   }}
                   onMouseLeave={(e) => {
                     gsap.to(e.currentTarget, {
                       z: 0,
                       scale: 1,
-                      duration: 0.4,
-                      ease: "expo.out",
+                      ...hoverConfig,
                     });
                   }}
                 >
@@ -633,7 +422,6 @@ export default function HeroContent() {
             <div className="flex items-center gap-2">
               <div
                 className="pulse-dot w-2 h-2 rounded-full bg-emerald-400"
-                style={{ transformStyle: "preserve-3d" }}
               />
               <span className="text-sm text-slate-400 font-light">
                 Available for freelance
