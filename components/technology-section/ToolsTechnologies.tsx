@@ -214,7 +214,7 @@ const ToolsTechnologies: React.FC = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ amount: 0.3 }}
+          viewport={{ amount: 0.1 }}
           className="mb-12"
         >
           <motion.h1
@@ -233,14 +233,13 @@ const ToolsTechnologies: React.FC = () => {
         </motion.div>
 
         {/* Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ amount: 0.3 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center"
-        >
-          {tools.map((tool, index) => (
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ amount: 0.1 }}
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center"
+                >          {tools.map((tool, index) => (
             <ToolCard
               key={index}
               icon={tool.icon}
