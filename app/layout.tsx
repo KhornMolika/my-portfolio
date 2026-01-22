@@ -4,6 +4,7 @@ import "./globals.css";
 import Aurora from "../components/background/Aurora";
 import Header from "../components/navbar/Header";
 import Footer from "../components/Footer"; // Import the Footer component
+import AnimationBg3d from "@/components/background/AnimationBg3d";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,15 +33,15 @@ export default function RootLayout({
       >
         {/* Aurora background */}
         <div className="fixed inset-0 -z-10">
-          <Aurora
+          <AnimationBg3d />
+          {/* <Aurora
             colorStops={["#0F2E26", "#6F8F7A", "#C6A15B"]}
             blend={0.5}
             amplitude={1.0}
             speed={0.5}
-          />
+          /> */}
         </div>
         <Header />
-
         <main className="pt-16">{children}</main>
         <Footer /> {/* Add the Footer component here */}
       </body>

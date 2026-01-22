@@ -47,10 +47,7 @@ export default function HeroAvatar() {
         />
 
         {/* Main circle */}
-        <motion.div
-          variants={itemVariants}
-          className="relative z-10"
-        >
+        <motion.div variants={itemVariants} className="relative z-10">
           <ProfileCard
             name="KHORN Molika"
             title="Software Engineer"
@@ -61,7 +58,11 @@ export default function HeroAvatar() {
             showUserInfo={true}
             enableTilt={true}
             enableMobileTilt={false}
-            onContactClick={() => console.log("clicked")}
+            onContactClick={() => {
+              document.getElementById("contact")?.scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
           />
         </motion.div>
 
