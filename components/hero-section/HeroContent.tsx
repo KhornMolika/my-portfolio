@@ -8,7 +8,7 @@ import HeroAvatarTag from "./HeroAvatarTag";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-type SocialPlatform = "github" | "linkedin" | "twitter" | "mail";
+type SocialPlatform = "github" | "linkedin" | "facebook" | "telegram";
 
 export default function HeroContent() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -26,8 +26,8 @@ export default function HeroContent() {
   const socialPlatforms: SocialPlatform[] = [
     "github",
     "linkedin",
-    "twitter",
-    "mail",
+    "facebook",
+    "telegram",
   ];
 
   useEffect(() => {
