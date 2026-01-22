@@ -10,7 +10,8 @@ const itemVariants = { // Defined here
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.8,
+      ease: "easeInOut",
     },
   },
 };
@@ -20,7 +21,7 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.15,
     },
   },
 };
@@ -119,17 +120,17 @@ const ProjectsSection = () => {
         <ChromaGrid
           items={webProjects}
           radius={300}
-          damping={0.45}
+          damping={0.8}
           fadeOut={0.6}
-          ease="power3.out"
+          ease="power4.inOut"
           itemVariants={itemVariants} // Pass itemVariants
         />
         <ChromaGrid
           items={appProjects}
           radius={300}
-          damping={0.45}
+          damping={0.8}
           fadeOut={0.6}
-          ease="power3.out"
+          ease="power4.inOut"
           itemVariants={itemVariants} // Pass itemVariants
         />
       </motion.div>
